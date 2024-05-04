@@ -2,15 +2,15 @@
 
 public partial class SessionResult
 {
-    public long SresId { get; set; }
+    public long Id { get; set; }
 
-    public double SresMathExp { get; set; }
+    public double MathExp { get; set; }
 
-    public double SresDeviation { get; set; }
+    public double Deviation { get; set; }
 
-    public double SresDispersion { get; set; }
+    public double Dispersion { get; set; }
 
-    public long SresScore { get; set; }
+    public long Score { get; set; }
 
-    public virtual Session Sres { get; set; } = null!;
+    public virtual Session Session { get; set; } = null!;
 }

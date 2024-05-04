@@ -2,21 +2,21 @@
 
 public partial class Procedure
 {
-    public long ProId { get; set; }
+    public long Id { get; set; }
 
-    public long ProAssignedBy { get; set; }
+    public long AssignedBy { get; set; }
 
-    public long ProAssignedTo { get; set; }
+    public long AssignedTo { get; set; }
 
-    public string ProDateTime { get; set; } = null!;
+    public string DateTime { get; set; } = null!;
 
-    public string ProName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public long? ProCabinet { get; set; }
+    public long? Cabinet { get; set; }
 
-    public virtual Doctor ProAssignedByNavigation { get; set; } = null!;
+    public virtual Doctor AssignedByNavigation { get; set; } = null!;
 
-    public virtual Patient ProAssignedToNavigation { get; set; } = null!;
+    public virtual Patient AssignedToNavigation { get; set; } = null!;
 
-    public virtual DoctorCabinet? ProCabinetNavigation { get; set; }
+    public virtual DoctorCabinet? CabinetNavigation { get; set; }
 }

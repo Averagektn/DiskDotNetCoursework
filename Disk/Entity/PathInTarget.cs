@@ -2,11 +2,11 @@
 
 public partial class PathInTarget
 {
-    public long PitSession { get; set; }
+    public long Session { get; set; }
 
-    public long PitTargetId { get; set; }
+    public long TargetId { get; set; }
 
-    public string PitCoordinatesJson { get; set; } = null!;
+    public string CoordinatesJson { get; set; } = null!;
 
-    public virtual Session PitSessionNavigation { get; set; } = null!;
+    public virtual Session SessionNavigation { get; set; } = null!;
 }

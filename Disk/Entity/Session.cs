@@ -2,23 +2,23 @@
 
 public partial class Session
 {
-    public long SesId { get; set; }
+    public long Id { get; set; }
 
-    public long SesMap { get; set; }
+    public long Map { get; set; }
 
-    public string SesLogFilePath { get; set; } = null!;
+    public string LogFilePath { get; set; } = null!;
 
-    public string SesDate { get; set; } = null!;
+    public string Date { get; set; } = null!;
 
-    public long SesAppointment { get; set; }
+    public long Appointment { get; set; }
 
-    public virtual ICollection<PathInTarget> PathInTargets { get; set; } = new List<PathInTarget>();
+    public virtual ICollection<PathInTarget> PathInTargets { get; set; } = [];
 
-    public virtual ICollection<PathToTarget> PathToTargets { get; set; } = new List<PathToTarget>();
+    public virtual ICollection<PathToTarget> PathToTargets { get; set; } = [];
 
-    public virtual Appointment SesAppointmentNavigation { get; set; } = null!;
+    public virtual Appointment AppointmentNavigation { get; set; } = null!;
 
-    public virtual Map SesMapNavigation { get; set; } = null!;
+    public virtual Map MapNavigation { get; set; } = null!;
 
     public virtual SessionResult? SessionResult { get; set; }
 }

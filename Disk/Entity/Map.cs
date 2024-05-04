@@ -2,17 +2,17 @@
 
 public partial class Map
 {
-    public long MapId { get; set; }
+    public long Id { get; set; }
 
-    public string MapCoordinatesJson { get; set; } = null!;
+    public string CoordinatesJson { get; set; } = null!;
 
-    public string MapCreatedAt { get; set; } = null!;
+    public string CreatedAt { get; set; } = null!;
 
-    public long MapCreatedBy { get; set; }
+    public long CreatedBy { get; set; }
 
-    public string MapName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public virtual Doctor MapCreatedByNavigation { get; set; } = null!;
+    public virtual Doctor CreatedByNavigation { get; set; } = null!;
 
-    public virtual ICollection<Session> Sessions { get; set; } = new List<Session>();
+    public virtual ICollection<Session> Sessions { get; set; } = [];
 }

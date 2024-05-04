@@ -2,25 +2,25 @@
 
 public partial class Doctor
 {
-    public long DocId { get; set; }
+    public long Id { get; set; }
 
-    public string DocName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public string DocSurname { get; set; } = null!;
+    public string Surname { get; set; } = null!;
 
-    public string? DocPatronymic { get; set; }
+    public string? Patronymic { get; set; }
 
-    public string DocPassword { get; set; } = null!;
+    public string Password { get; set; } = null!;
 
-    public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+    public virtual ICollection<Appointment> Appointments { get; set; } = [];
 
-    public virtual ICollection<Map> Maps { get; set; } = new List<Map>();
+    public virtual ICollection<Map> Maps { get; set; } = [];
 
-    public virtual ICollection<Note> Notes { get; set; } = new List<Note>();
+    public virtual ICollection<Note> Notes { get; set; } = [];
 
-    public virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
+    public virtual ICollection<Operation> Operations { get; set; } = [];
 
-    public virtual ICollection<Procedure> Procedures { get; set; } = new List<Procedure>();
+    public virtual ICollection<Procedure> Procedures { get; set; } = [];
 
-    public virtual ICollection<TargetFile> TargetFiles { get; set; } = new List<TargetFile>();
+    public virtual ICollection<TargetFile> TargetFiles { get; set; } = [];
 }

@@ -2,21 +2,21 @@
 
 public partial class Operation
 {
-    public long OpId { get; set; }
+    public long Id { get; set; }
 
-    public long OpCard { get; set; }
+    public long Card { get; set; }
 
-    public long? OpAsingnedBy { get; set; }
+    public long? AsingnedBy { get; set; }
 
-    public string OpName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public long? OpCabinet { get; set; }
+    public long? Cabinet { get; set; }
 
-    public string OpDateTime { get; set; } = null!;
+    public string DateTime { get; set; } = null!;
 
-    public virtual Doctor? OpAsingnedByNavigation { get; set; }
+    public virtual Doctor? AsingnedByNavigation { get; set; }
 
-    public virtual DoctorCabinet? OpCabinetNavigation { get; set; }
+    public virtual DoctorCabinet? CabinetNavigation { get; set; }
 
-    public virtual Card OpCardNavigation { get; set; } = null!;
+    public virtual Card CardNavigation { get; set; } = null!;
 }

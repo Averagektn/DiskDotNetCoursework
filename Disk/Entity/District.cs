@@ -2,11 +2,11 @@
 
 public partial class District
 {
-    public long DstId { get; set; }
+    public long Id { get; set; }
 
-    public string DstName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public long DstRegion { get; set; }
+    public long Region { get; set; }
 
-    public virtual Region DstRegionNavigation { get; set; } = null!;
+    public virtual Region RegionNavigation { get; set; } = null!;
 }

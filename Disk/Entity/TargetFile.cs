@@ -2,11 +2,11 @@
 
 public partial class TargetFile
 {
-    public long TfId { get; set; }
+    public long Id { get; set; }
 
-    public string TfFilepath { get; set; } = null!;
+    public string Filepath { get; set; } = null!;
 
-    public long TfAddedBy { get; set; }
+    public long AddedBy { get; set; }
 
-    public virtual Doctor TfAddedByNavigation { get; set; } = null!;
+    public virtual Doctor AddedByNavigation { get; set; } = null!;
 }

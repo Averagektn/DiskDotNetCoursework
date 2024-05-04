@@ -2,15 +2,15 @@
 
 public partial class Xray
 {
-    public long XrId { get; set; }
+    public long Id { get; set; }
 
-    public string XrDate { get; set; } = null!;
+    public string Date { get; set; } = null!;
 
-    public string XrFilePath { get; set; } = null!;
+    public string FilePath { get; set; } = null!;
 
-    public string? XrDescription { get; set; }
+    public string? Description { get; set; }
 
-    public long XrCard { get; set; }
+    public long Card { get; set; }
 
-    public virtual Card XrCardNavigation { get; set; } = null!;
+    public virtual Card CardNavigation { get; set; } = null!;
 }

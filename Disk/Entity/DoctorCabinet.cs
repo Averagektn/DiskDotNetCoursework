@@ -2,15 +2,15 @@
 
 public partial class DoctorCabinet
 {
-    public long DcId { get; set; }
+    public long Id { get; set; }
 
-    public long DcFloor { get; set; }
+    public long Floor { get; set; }
 
-    public long DcCabinetNum { get; set; }
+    public long CabinetNum { get; set; }
 
-    public string DcName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
+    public virtual ICollection<Operation> Operations { get; set; } = [];
 
-    public virtual ICollection<Procedure> Procedures { get; set; } = new List<Procedure>();
+    public virtual ICollection<Procedure> Procedures { get; set; } = [];
 }

@@ -2,19 +2,19 @@
 
 public partial class PathToTarget
 {
-    public long PttSession { get; set; }
+    public long Session { get; set; }
 
-    public long PttNum { get; set; }
+    public long Num { get; set; }
 
-    public string PttCoordinatesJson { get; set; } = null!;
+    public string CoordinatesJson { get; set; } = null!;
 
-    public double PttTime { get; set; }
+    public double Time { get; set; }
 
-    public double PttAngleDistance { get; set; }
+    public double AngleDistance { get; set; }
 
-    public double PttAngleSpeed { get; set; }
+    public double AngleSpeed { get; set; }
 
-    public double PttApproachSpeed { get; set; }
+    public double ApproachSpeed { get; set; }
 
-    public virtual Session PttSessionNavigation { get; set; } = null!;
+    public virtual Session SessionNavigation { get; set; } = null!;
 }

@@ -2,17 +2,17 @@
 
 public partial class Appointment
 {
-    public long AppId { get; set; }
+    public long Id { get; set; }
 
-    public string AppTime { get; set; } = null!;
+    public string Time { get; set; } = null!;
 
-    public long AppDoctor { get; set; }
+    public long Doctor { get; set; }
 
-    public long AppPatient { get; set; }
+    public long Patient { get; set; }
 
-    public virtual Doctor AppDoctorNavigation { get; set; } = null!;
+    public virtual Doctor DoctorNavigation { get; set; } = null!;
 
-    public virtual Patient AppPatientNavigation { get; set; } = null!;
+    public virtual Patient PatientNavigation { get; set; } = null!;
 
-    public virtual ICollection<Session> Sessions { get; set; } = new List<Session>();
+    public virtual ICollection<Session> Sessions { get; set; } = [];
 }
