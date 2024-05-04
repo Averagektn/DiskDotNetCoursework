@@ -403,3 +403,4 @@ FodyWeavers.xsd
 *.pdf
 *.TIF
 *.doc
+/Disk/Db/disk.db
