@@ -9,7 +9,7 @@
         Title="{x:Static lang:Localization.Menu_Title}" Height="450" Width="400">
 
     <Window.Resources>
-        <ResourceDictionary Source="Style/BtnStyles.xaml"/>
+        <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
     </Window.Resources>
 
     <Window.DataContext>
@@ -32,7 +32,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.RowSpan="2" Source="Properties/logo.jpg" HorizontalAlignment="Left"/>
+        <Image Grid.RowSpan="2" Source="/Properties/logo.jpg" HorizontalAlignment="Left"/>
 
         <Viewbox Grid.Row="1" Grid.Column="1">
             <Button Command="{Binding StartClick}" Content="{x:Static lang:Localization.Menu_StartGame}">
