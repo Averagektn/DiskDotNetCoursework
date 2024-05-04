@@ -6,6 +6,8 @@ namespace Disk.Repository
 {
     public class DoctorRepository(DiskContext context) : IDoctorRepository
     {
+        private DiskContext _context = new();
+
         public async Task<int> PerformRegistrationAsync(Doctor doctor)
         {
             throw new NotImplementedException();

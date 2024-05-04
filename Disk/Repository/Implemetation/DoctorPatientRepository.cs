@@ -4,8 +4,10 @@ using Disk.Repository.Interface;
 
 namespace Disk.Repository
 {
-    public class DoctorPatientRepository(DiskContext context) : IDoctorPatientRepository
+    public class DoctorPatientRepository : IDoctorPatientRepository
     {
+        private DiskContext _context = new();
+
         public async Task<int> AssignAppointmentAsync()
         {
             throw new NotImplementedException();

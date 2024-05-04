@@ -61,7 +61,7 @@ public partial class DiskContext : DbContext
     public virtual DbSet<Xray> Xrays { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite(Config.Default.DB_CONNECTION);
+        => optionsBuilder.UseSqlite("Data Source = C:\\Archive\\6 semester\\DiskDotNetCoursework\\Disk\\Db\\disk.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -460,14 +460,14 @@ public partial class DiskContext : DbContext
 
         modelBuilder.Entity<Region>(entity =>
         {
-            entity.HasKey(e => e.RgnId);
+            entity.HasKey(e => e.Id);
 
             entity.ToTable("region");
 
-            entity.HasIndex(e => e.RgnName, "IX_region_rgn_name").IsUnique();
+            entity.HasIndex(e => e.Name, "IX_region_rgn_name").IsUnique();
 
-            entity.Property(e => e.RgnId).HasColumnName("rgn_id");
-            entity.Property(e => e.RgnName)
+            entity.Property(e => e.Id).HasColumnName("rgn_id");
+            entity.Property(e => e.Name)
                 .UseCollation("NOCASE")
                 .HasColumnName("rgn_name");
         });

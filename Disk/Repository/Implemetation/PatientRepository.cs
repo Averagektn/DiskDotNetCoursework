@@ -16,6 +16,11 @@ namespace Disk.Repository
             throw new NotImplementedException();
         }
 
+        public async Task UpdatePatientAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task AddAddressAsync()
         {
             throw new NotImplementedException();

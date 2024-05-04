@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Disk.ViewModel;
+using System.Windows;
 
 namespace Disk
 {

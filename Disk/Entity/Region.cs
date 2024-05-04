@@ -2,11 +2,11 @@
 
 public partial class Region
 {
-    public long RgnId { get; set; }
+    public long Id { get; set; }
 
-    public string RgnName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
+    public virtual ICollection<Address> Addresses { get; set; } = [];
 
-    public virtual ICollection<District> Districts { get; set; } = new List<District>();
+    public virtual ICollection<District> Districts { get; set; } = [];
 }
