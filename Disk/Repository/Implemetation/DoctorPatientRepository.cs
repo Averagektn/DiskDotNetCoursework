@@ -2,11 +2,11 @@
 using Disk.Entity;
 using Disk.Repository.Interface;
 
-namespace Disk.Repository
+namespace Disk.Repository.Implemetation
 {
     public class DoctorPatientRepository : IDoctorPatientRepository
     {
-        private DiskContext _context = new();
+        private readonly DiskContext _context = new();
 
         public async Task<int> AssignAppointmentAsync()
         {

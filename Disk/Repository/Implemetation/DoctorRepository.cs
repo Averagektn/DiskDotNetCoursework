@@ -2,11 +2,11 @@
 using Disk.Entity;
 using Disk.Repository.Interface;
 
-namespace Disk.Repository
+namespace Disk.Repository.Implemetation
 {
-    public class DoctorRepository(DiskContext context) : IDoctorRepository
+    public class DoctorRepository : IDoctorRepository
     {
-        private DiskContext _context = new();
+        private readonly DiskContext _context = new();
 
         public async Task<int> PerformRegistrationAsync(Doctor doctor)
         {
@@ -18,7 +18,7 @@ namespace Disk.Repository
             throw new NotImplementedException();
         }
 
-        public async Task EditAccountAsync(Doctor doctor)
+        public async Task UpdateDoctorAsync(Doctor doctor)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace Disk.Repository
             throw new NotImplementedException();
         }
 
-        public async Task AssignProcedure(Procedure procedure)
+        public async Task<List<Appointment>> GetAppointmentsAsync()
         {
             throw new NotImplementedException();
         }
