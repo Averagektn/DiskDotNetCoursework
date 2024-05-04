@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Disk.ViewModel.Common;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,7 +8,7 @@ using Settings = Disk.Properties.Config.Config;
 
 namespace Disk.ViewModel
 {
-    public class MenuViewModel : INotifyPropertyChanged
+    public class MenuViewModel : BaseViewModel
     {
         // Actions
         public ICommand ChangeLanguage => new Command(ChangeLanguageClick);
@@ -30,19 +31,6 @@ namespace Disk.ViewModel
             {
                 Directory.CreateDirectory(Settings.MAPS_DIR_PATH);
             }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string? propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = (newValue);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-
-            return false;
         }
 
         private void ChangeLanguageClick(object? parameter)

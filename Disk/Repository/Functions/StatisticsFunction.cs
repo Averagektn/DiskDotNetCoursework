@@ -2,7 +2,7 @@
 
 namespace Disk.Repository.Functions
 {
-    public class StatisticsFunction(DiskContext context)
+    public class StatisticsFunction
     {
         public async Task<double> GetUserAverageMathExpAsync()
         {

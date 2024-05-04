@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Disk.ViewModel.Common;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,7 +8,7 @@ using Settings = Disk.Properties.Config.Config;
 
 namespace Disk.ViewModel
 {
-    public class UserDataViewModel : INotifyPropertyChanged
+    public class UserDataViewModel : BaseViewModel
     {
         // Properties
         public string UserName { get => _userName; set => SetProperty(ref _userName, value); }
@@ -33,19 +34,6 @@ namespace Disk.ViewModel
         }
 
         private static Settings Settings => Settings.Default;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string? propertyName = null)
-        {
-            if (!(Equals(field, newValue)))
-            {
-                field = (newValue);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-
-            return false;
-        }
 
         private void OnStartClick(object? obj)
         {

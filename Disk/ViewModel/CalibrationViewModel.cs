@@ -1,4 +1,5 @@
 ﻿using Disk.Data.Impl;
+using Disk.ViewModel.Common;
 using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,7 @@ using Settings = Disk.Properties.Config.Config;
 
 namespace Disk.ViewModel
 {
-    public class CalibrationViewModel : INotifyPropertyChanged
+    public class CalibrationViewModel : BaseViewModel
     {
         // Properties
         public string XCoord { get => _xCoord; set => SetProperty(ref _xCoord, value); }
@@ -52,19 +53,6 @@ namespace Disk.ViewModel
         private float YAngle = Settings.Y_MAX_ANGLE;
 
         private bool IsRunningThread = true;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string? propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = (newValue);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-
-            return false;
-        }
 
         public CalibrationViewModel()
         {
