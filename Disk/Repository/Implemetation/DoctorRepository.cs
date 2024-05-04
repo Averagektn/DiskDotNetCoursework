@@ -1,31 +1,32 @@
 ﻿using Disk.Db.Context;
 using Disk.Entity;
+using Disk.Repository.Interface;
 
 namespace Disk.Repository
 {
-    public class DoctorRepository(DiskContext context)
+    public class DoctorRepository(DiskContext context) : IDoctorRepository
     {
-        public async Task<int> PerformRegistration(Doctor doctor)
+        public async Task<int> PerformRegistrationAsync(Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<int> PerformAuthorization(Doctor doctor)
+        public async Task<int> PerformAuthorizationAsync(Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
-        public async Task EditAccount(Doctor doctor)
+        public async Task EditAccountAsync(Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
-        public async Task AddMap(Map map)
+        public async Task AddMapAsync(Map map)
         {
             throw new NotImplementedException();
         }
 
-        public async Task AddTargetFile(TargetFile targetFile)
+        public async Task AddTargetFileAsync(TargetFile targetFile)
         {
             throw new NotImplementedException();
         }
