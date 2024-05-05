@@ -1,7 +1,7 @@
-﻿using Disk.ViewModel.Common;
-using System.ComponentModel;
+﻿using Disk.AppSession;
+using Disk.View;
+using Disk.ViewModel.Common;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Settings = Disk.Properties.Config.Config;
@@ -10,18 +10,22 @@ namespace Disk.ViewModel
 {
     public class MenuViewModel : BaseViewModel
     {
-        // Actions
+        private string _doctorCredentials;
+        public string DoctorCredentials { get => _doctorCredentials; set => SetProperty(ref _doctorCredentials, value); }
+
         public ICommand ChangeLanguage => new Command(ChangeLanguageClick);
+        public ICommand ToPatientsClick => new Command(OnPatientsClick);
         public ICommand MapConstructorClick => new Command(OnMapContructorClick);
         public ICommand SettingsClick => new Command(OnSettingsClick);
         public ICommand StartClick => new Command(OnStartClick);
-        public ICommand QuitClick => new Command(OnQuitClick);
         public ICommand CalibrationClick => new Command(OnCalibrationClick);
 
         private static Settings Settings => Settings.Default;
 
         public MenuViewModel()
         {
+            _doctorCredentials = CurrentSession.Doctor.ToString();
+
             if (!Directory.Exists(Settings.MAIN_DIR_PATH))
             {
                 Directory.CreateDirectory(Settings.MAIN_DIR_PATH);
@@ -58,34 +62,39 @@ namespace Disk.ViewModel
             Application.Current.Shutdown();
         }
 
+        private void OnPatientsClick(object? parameter)
+        {
+            Application.Current.Windows.OfType<MenuWindow>().First().Hide();
+            new PatientsWindow().ShowDialog();
+            Application.Current.Windows.OfType<MenuWindow>().First().Show();
+        }
+
         private void OnMapContructorClick(object? parameter)
         {
-            Application.Current.MainWindow.Hide();
+            Application.Current.Windows.OfType<MenuWindow>().First().Hide();
             new MapCreator().ShowDialog();
-            Application.Current.MainWindow.Show();
+            Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
 
         private void OnStartClick(object? parameter)
         {
-            Application.Current.MainWindow.Hide();
+            Application.Current.Windows.OfType<MenuWindow>().First().Hide();
             new UserDataForm().ShowDialog();
-            Application.Current.MainWindow.Show();
+            Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
 
         private void OnSettingsClick(object? parameter)
         {
-            Application.Current.MainWindow.Hide();
+            //Application.Current.Windows.OfType<MenuWindow>().First().Hide();
             new SettingsWindow().ShowDialog();
-            Application.Current.MainWindow.Show();
+            Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
 
         private void OnCalibrationClick(object? parameter)
         {
-            Application.Current.MainWindow.Hide();
+            Application.Current.Windows.OfType<MenuWindow>().First().Hide();
             new CalibrationWindow().ShowDialog();
-            Application.Current.MainWindow.Show();
+            Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
-
-        private void OnQuitClick(object? parameter) => Application.Current.MainWindow.Close();
     }
 }

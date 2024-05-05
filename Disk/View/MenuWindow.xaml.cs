@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Disk.View;
+using System.Windows;
 
 namespace Disk
 {
@@ -10,6 +11,12 @@ namespace Disk
         public MenuWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Show();
+            base.OnClosed(e);
         }
     }
 }

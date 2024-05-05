@@ -10,7 +10,7 @@ namespace Disk.Repository.Implemetation
     {
         private readonly DiskContext _context = new();
 
-        public async Task<long> PerformRegistrationAsync(Doctor doctor)
+        public async Task<Doctor> PerformRegistrationAsync(Doctor doctor)
         {
             var doc = await _context
                 .Doctors
@@ -25,19 +25,18 @@ namespace Disk.Repository.Implemetation
             var res = await _context.AddAsync(doctor);
             await _context.SaveChangesAsync();
 
-            return res.Entity.Id;
+            return res.Entity;
         }
 
-        public async Task<long> PerformAuthorizationAsync(Doctor doctor)
-        {
-            var doc = await _context
-                .Doctors
+        public async Task<Doctor> PerformAuthorizationAsync(Doctor doctor) =>
+            await _context.Doctors
                 .Where(d => d.Name == doctor.Name && d.Surname == doctor.Surname && d.Patronymic == d.Patronymic
                     && d.Password == doctor.Password)
                 .FirstOrDefaultAsync() ?? throw new DoctorNotFound();
 
-            return doc.Id;
-        }
+/*
+        public async Task<Doctor> GetDoctorById(long id) 
+            => await _context.Doctors.Where(d => d.Id == id).FirstOrDefaultAsync() ?? throw new DoctorNotFound();*/
 
         public async Task UpdateDoctorAsync(Doctor doctor)
         {

@@ -2,13 +2,14 @@
 using Disk.Entity;
 using Disk.Repository.Exceptions;
 using Disk.Repository.Implemetation;
+using Disk.View;
 using Disk.ViewModel.Common;
 using System.Security;
 using System.Windows;
 
 namespace Disk.ViewModel
 {
-    public class DoctorRegistrationViewModel : PopupViewModel
+    public class DoctorAuthenticationViewModel : PopupViewModel
     {
         public Doctor Doctor { get; set; } = new();
         public SecureString Password { get; set; } = new();
@@ -25,11 +26,11 @@ namespace Disk.ViewModel
 
             try
             {
-                CurrentSession.DoctorId = await _doctorRepository.PerformRegistrationAsync(Doctor);
+                CurrentSession.Doctor = await _doctorRepository.PerformRegistrationAsync(Doctor);
 
-                Application.Current.MainWindow.Hide();
+                Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Hide();
                 new MenuWindow().ShowDialog();
-                Application.Current.MainWindow.Show();
+                Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Show();
             }
             catch (DoctorDuplicationException)
             {
@@ -48,11 +49,10 @@ namespace Disk.ViewModel
 
             try
             {
-                CurrentSession.DoctorId = await _doctorRepository.PerformAuthorizationAsync(Doctor);
+                CurrentSession.Doctor = await _doctorRepository.PerformAuthorizationAsync(Doctor);
 
-                Application.Current.MainWindow.Hide();
+                Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Hide();
                 new MenuWindow().ShowDialog();
-                Application.Current.MainWindow.Show();
             }
             catch (DoctorNotFound)
             {

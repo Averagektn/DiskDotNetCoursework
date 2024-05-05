@@ -6,11 +6,11 @@ using System.Windows.Controls;
 
 namespace Disk.View
 {
-    public partial class DoctorRegistrationWindow : Window
+    public partial class DoctorAuthenticationWindow : Window
     {
-        private readonly DoctorRegistrationViewModel _viewModel = new();
+        private readonly DoctorAuthenticationViewModel _viewModel = new();
 
-        public DoctorRegistrationWindow()
+        public DoctorAuthenticationWindow()
         {
             InitializeComponent();
             DataContext = _viewModel;

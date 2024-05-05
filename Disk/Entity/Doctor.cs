@@ -1,4 +1,6 @@
-﻿namespace Disk.Entity;
+﻿using System.Windows.Controls;
+
+namespace Disk.Entity;
 
 public partial class Doctor
 {
@@ -23,4 +25,9 @@ public partial class Doctor
     public virtual ICollection<Procedure> Procedures { get; set; } = [];
 
     public virtual ICollection<TargetFile> TargetFiles { get; set; } = [];
+
+    public override string ToString() => 
+        $"{Surname[..1].ToUpper() + Surname[1..]} " +
+        $"{Name[..1].ToUpper() + Name[1..]} " +
+        $"{Patronymic?[..1].ToUpper() + Patronymic?[1..]}";
 }

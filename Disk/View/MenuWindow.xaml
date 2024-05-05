@@ -35,7 +35,11 @@
         <Image Grid.RowSpan="2" Source="/Properties/logo.jpg" HorizontalAlignment="Left"/>
 
         <Viewbox Grid.Row="1" Grid.Column="1">
-            <Button Command="{Binding StartClick}" Content="{x:Static lang:Localization.Menu_StartGame}">
+            <Button 
+                Command="{Binding StartClick}" 
+                Content="{x:Static lang:Localization.Menu_StartGame}"
+                Foreground="White"
+                Background="Black">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
                 </Button.Style>
@@ -47,7 +51,11 @@
         </Viewbox>
 
         <Viewbox Grid.Row="2" Grid.Column="1">
-            <Button Command="{Binding SettingsClick}" Content="{x:Static lang:Localization.Menu_Settings}">
+            <Button 
+                Command="{Binding SettingsClick}" 
+                Content="{x:Static lang:Localization.Menu_Settings}"
+                Foreground="White"
+                Background="Black">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
                 </Button.Style>
@@ -59,7 +67,11 @@
         </Viewbox>
 
         <Viewbox Grid.Row="3" Grid.Column="1">
-            <Button Command="{Binding CalibrationClick}" Content="{x:Static lang:Localization.Menu_Calibration}">
+            <Button 
+                Command="{Binding CalibrationClick}" 
+                Content="{x:Static lang:Localization.Menu_Calibration}"
+                Foreground="White"
+                Background="Black">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
                 </Button.Style>
@@ -71,7 +83,11 @@
         </Viewbox>
 
         <Viewbox Grid.Row="4" Grid.Column="1">
-            <Button Command="{Binding MapConstructorClick}" Content="{x:Static lang:Localization.Menu_MapConstructor}">
+            <Button 
+                Command="{Binding MapConstructorClick}" 
+                Content="{x:Static lang:Localization.Menu_MapConstructor}"
+                Foreground="White"
+                Background="Black">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
                 </Button.Style>
@@ -83,7 +99,11 @@
         </Viewbox>
 
         <Viewbox Grid.Row="5" Grid.Column="1">
-            <Button Command="{Binding QuitClick}" Content="{x:Static lang:Localization.Menu_Quit}">
+            <Button 
+                Command="{Binding ToPatientsClick}" 
+                Content="Список пациентов"
+                Foreground="White"
+                Background="Black">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
                 </Button.Style>
@@ -92,6 +112,10 @@
                 <Button.Width>200</Button.Width>
                 <Button.Height>50</Button.Height>
             </Button>
+        </Viewbox>
+
+        <Viewbox Grid.Row="6" Grid.ColumnSpan="3">
+            <TextBlock HorizontalAlignment="Center" Text="{Binding DoctorCredentials}"/>
         </Viewbox>
 
         <Menu Height="20" VerticalAlignment="Top">
