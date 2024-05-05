@@ -1,6 +1,7 @@
 ﻿using Disk.Db.Context;
 using Disk.Entity;
 using Disk.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Disk.Repository.Implemetation
 {
@@ -10,12 +11,12 @@ namespace Disk.Repository.Implemetation
 
         public async Task<List<Region>> GetRegionsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Regions.ToListAsync();
         }
 
         public async Task<List<District>> GetDistrictsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Districts.ToListAsync();
         }
 
         public async Task<Address> AddAddressIfNotExistsAsync(Address address)
@@ -33,7 +34,10 @@ namespace Disk.Repository.Implemetation
 
         public async Task<District> AddDistrict(District district)
         {
-            throw new NotImplementedException();
+            var res = await _context.Districts.AddAsync(district);
+            await _context.SaveChangesAsync();
+
+            return res.Entity;
         }
     }
 }

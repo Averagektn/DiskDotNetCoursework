@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddDistrictViewModel}"
         mc:Ignorable="d"
-        Title="AddDistrictWindow" Height="450" Width="800">
-    <Grid>
+        Title="AddDistrictWindow" Height="350" Width="300">
+    <Window.Resources>
+        <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
+    </Window.Resources>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Название района" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+        <TextBox Padding="0,5"
+              Width="255"
+              BorderThickness="0,0,0,1"
+              HorizontalAlignment="Left"
+              Text="{Binding DistrictName}"/>
+
+        <TextBlock Text="Регион" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+        <ComboBox 
+            Margin="0 15"
+            Width="255"
+            ItemsSource="{Binding Regions}" 
+            SelectedItem="{Binding SelectedRegion}"/>
         
-    </Grid>
+        <Button Content="Добавить" Command="{Binding AddDistrictCommand}"                    
+                Foreground="White"
+                    Background="Black"
+                    Margin="0,25"
+                    Height="35"
+                    Width="250">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+            </Button.Style>
+        </Button>
+
+        <Popup Placement="Center" 
+                   AllowsTransparency="True" 
+                   PopupAnimation="Fade" 
+                   IsOpen="{Binding IsShowPopup}">
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="6" Padding="10">
+                <TextBlock Text="{Binding PopupMessage}" />
+            </Border>
+        </Popup>
+    </StackPanel>
 </Window>

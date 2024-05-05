@@ -9,15 +9,14 @@ namespace Disk.ViewModel
     {
         private readonly AddressRepository _addressRepository = new();
         public ICommand AddRegionCommand => new Command(AddRegion);
-        public Region Region { get; set; } = new();
+        public string RegionName { get; set; } = string.Empty;
 
         public async void AddRegion(object? parameter)
         {
             try
             {
-                await _addressRepository.AddRegion(Region);
+                await _addressRepository.AddRegion(new() { Name = RegionName });
                 await ShowPopup("Регион успешно добавлен");
-                Region.Id = default;
             }
             catch (Exception)
             {

@@ -19,7 +19,7 @@
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text="{Binding Region.Name}"/>
+              Text="{Binding RegionName}"/>
         
         <Button Content="Добавить" Command="{Binding AddRegionCommand}"                    
                 Foreground="White"

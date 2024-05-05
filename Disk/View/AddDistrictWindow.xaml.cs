@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Disk.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Disk.View
 {
-    /// <summary>
-    /// Interaction logic for AddDistrictWindow.xaml
-    /// </summary>
     public partial class AddDistrictWindow : Window
     {
+        public readonly AddDistrictViewModel _viewModel = new();
+
         public AddDistrictWindow()
         {
             InitializeComponent();
+            DataContext = _viewModel;   
         }
     }
 }
