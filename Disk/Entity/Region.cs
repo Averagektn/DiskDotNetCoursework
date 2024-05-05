@@ -6,7 +6,7 @@ public partial class Region
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<Address> Addresses { get; set; } = [];
-
     public virtual ICollection<District> Districts { get; set; } = [];
+
+    public override string ToString() => Name;
 }

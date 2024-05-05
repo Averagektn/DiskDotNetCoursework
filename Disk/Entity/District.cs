@@ -9,4 +9,6 @@ public partial class District
     public long Region { get; set; }
 
     public virtual Region RegionNavigation { get; set; } = null!;
+
+    public virtual ICollection<Address> Addresses { get; set; } = [];
 }

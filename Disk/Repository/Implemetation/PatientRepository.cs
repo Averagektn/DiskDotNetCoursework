@@ -1,12 +1,20 @@
 ﻿using Disk.Db.Context;
 using Disk.Entity;
 using Disk.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Disk.Repository.Implemetation
 {
     public class PatientRepository : IPatientRepository
     {
         private readonly DiskContext _context = new();
+
+        public async Task<List<Patient>> GetPatientsAsync() =>
+            await _context.Patients
+                .Include(p => p.AddressNavigation)
+                .ThenInclude(a => a.DistrictNavigation)
+                .ThenInclude(d => d.RegionNavigation)
+                .ToListAsync();
 
         public async Task<int> AddPatientAsync(Patient patient)
         {

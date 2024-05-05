@@ -6,8 +6,133 @@
         xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:AddPatientViewModel}"
         mc:Ignorable="d"
-        Title="AddPatientWindow" Height="450" Width="800">
+        Title="AddPatientWindow" Height="700" Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+            <TextBlock Text="Дата рождения" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patient.DateOfBirth}"/>
+
+            <TextBlock Text="Отчество" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patient.Patronymic}"/>
+
+            <TextBlock Text="Фамилия" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patient.Surname}"/>
+
+            <TextBlock Text="Имя" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patient.Name}"/>
+
+            <TextBlock Text="Мобильный телефон" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patient.PhoneMobile}"/>
+
+            <TextBlock Text="Домашний телефон" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patient.PhoneMobile}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+            <TextBlock Text="Дом" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+              Width="255"
+              BorderThickness="0,0,0,1"
+              HorizontalAlignment="Left"
+              Text="{Binding Address.House}"/>
+
+            <TextBlock Text="Квартира" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+              Width="255"
+              BorderThickness="0,0,0,1"
+              HorizontalAlignment="Left"
+              Text="{Binding Address.Apartment}"/>
+
+            <TextBlock Text="Корпус" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+              Width="255"
+              BorderThickness="0,0,0,1"
+              HorizontalAlignment="Left"
+              Text="{Binding Address.Corpus}"/>
+
+            <TextBlock Text="Улица" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+              Width="255"
+              BorderThickness="0,0,0,1"
+              HorizontalAlignment="Left"
+              Text="{Binding Address.Street}"/>
+
+            <ComboBox 
+                Margin="0 15"
+                ItemsSource="{Binding Regions}" 
+                SelectedItem="{Binding SelectedRegion}" 
+                SelectionChanged="RegionComboBox_SelectionChanged"/>
+
+            <ComboBox 
+                Margin="0 15"
+                ItemsSource="{Binding Districts}" 
+                SelectedItem="{Binding SelectedDistrict}"/>
+
+        </StackPanel>
+
+        <Button Grid.ColumnSpan="2" Content="Добавить пациента" HorizontalAlignment="Center"
+                VerticalAlignment="Bottom" Width="200"
+                Height="50"
+                Margin="0 0 0 50"                    
+                Foreground="White"
+                Background="Black"
+                Command="{Binding AddPatientCommand}">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

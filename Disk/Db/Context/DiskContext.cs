@@ -79,13 +79,13 @@ public partial class DiskContext : DbContext
                 .HasDefaultValue(1)
                 .HasColumnName("addr_corpus");
             entity.Property(e => e.House).HasColumnName("addr_house");
-            entity.Property(e => e.Region).HasColumnName("addr_region");
+            entity.Property(e => e.District).HasColumnName("addr_district");
             entity.Property(e => e.Street)
                 .UseCollation("RTRIM")
                 .HasColumnName("addr_street");
 
-            entity.HasOne(d => d.RegionNavigation).WithMany(p => p.Addresses)
-                .HasForeignKey(d => d.Region)
+            entity.HasOne(d => d.DistrictNavigation).WithMany(p => p.Addresses)
+                .HasForeignKey(d => d.District)
                 .OnDelete(DeleteBehavior.Restrict);
         });
 

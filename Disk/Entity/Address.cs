@@ -4,7 +4,7 @@ public partial class Address
 {
     public long Id { get; set; }
 
-    public long Region { get; set; }
+    public long District { get; set; }
 
     public string Street { get; set; } = null!;
 
@@ -14,7 +14,7 @@ public partial class Address
 
     public long Corpus { get; set; }
 
-    public virtual Region RegionNavigation { get; set; } = null!;
+    public virtual District DistrictNavigation { get; set; } = null!;
 
     public virtual ICollection<Patient> Patients { get; set; } = [];
 }
