@@ -18,24 +18,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-            <TextBlock Text="Дата рождения" 
-           Margin="0,15"
-           HorizontalAlignment="Left"/>
-            <TextBox Padding="0,5"
-          Width="255"
-          BorderThickness="0,0,0,1"
-          HorizontalAlignment="Left"
-          Text="{Binding Patient.DateOfBirth}"/>
-
-            <TextBlock Text="Отчество" 
-           Margin="0,15"
-           HorizontalAlignment="Left"/>
-            <TextBox Padding="0,5"
-          Width="255"
-          BorderThickness="0,0,0,1"
-          HorizontalAlignment="Left"
-          Text="{Binding Patient.Patronymic}"/>
-
             <TextBlock Text="Фамилия" 
            Margin="0,15"
            HorizontalAlignment="Left"/>
@@ -43,7 +25,7 @@
           Width="255"
           BorderThickness="0,0,0,1"
           HorizontalAlignment="Left"
-          Text="{Binding Patient.Surname}"/>
+          Text="{Binding Surname}"/>
 
             <TextBlock Text="Имя" 
            Margin="0,15"
@@ -52,7 +34,23 @@
           Width="255"
           BorderThickness="0,0,0,1"
           HorizontalAlignment="Left"
-          Text="{Binding Patient.Name}"/>
+          Text="{Binding Name}"/>
+
+            <TextBlock Text="Отчество" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding Patronymic}"/>
+
+            <TextBlock Text="Дата рождения" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <DatePicker SelectedDate="{Binding Birthday}"          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left" />
 
             <TextBlock Text="Мобильный телефон" 
            Margin="0,15"
@@ -61,7 +59,7 @@
           Width="255"
           BorderThickness="0,0,0,1"
           HorizontalAlignment="Left"
-          Text="{Binding Patient.PhoneMobile}"/>
+          Text="{Binding PhoneMobile}"/>
 
             <TextBlock Text="Домашний телефон" 
            Margin="0,15"
@@ -70,7 +68,7 @@
           Width="255"
           BorderThickness="0,0,0,1"
           HorizontalAlignment="Left"
-          Text="{Binding Patient.PhoneMobile}"/>
+          Text="{Binding PhoneHome}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
@@ -81,7 +79,7 @@
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text="{Binding Address.House}"/>
+              Text="{Binding House}"/>
 
             <TextBlock Text="Квартира" 
                Margin="0,15"
@@ -90,7 +88,7 @@
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text="{Binding Address.Apartment}"/>
+              Text="{Binding Apartment}"/>
 
             <TextBlock Text="Корпус" 
                Margin="0,15"
@@ -99,7 +97,7 @@
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text="{Binding Address.Corpus}"/>
+              Text="{Binding Corpus}"/>
 
             <TextBlock Text="Улица" 
                Margin="0,15"
@@ -108,8 +106,11 @@
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text="{Binding Address.Street}"/>
+              Text="{Binding Street}"/>
 
+            <TextBlock Text="Регион" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal">
                 <ComboBox 
                 Margin="0 15"
@@ -128,6 +129,9 @@
                 </Button>
             </StackPanel>
 
+            <TextBlock Text="Район" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal">
                 <ComboBox 
                 Margin="0 15"
@@ -158,5 +162,14 @@
                 <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
             </Button.Style>
         </Button>
+
+        <Popup Placement="Center" 
+                   AllowsTransparency="True" 
+                   PopupAnimation="Fade" 
+                   IsOpen="{Binding IsShowPopup}">
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="6" Padding="10">
+                <TextBlock Text="{Binding PopupMessage}" />
+            </Border>
+        </Popup>
     </Grid>
 </Window>

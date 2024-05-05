@@ -14,14 +14,11 @@ namespace Disk.View
             DataContext = _viewModel;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var textBox = (TextBox)sender;
+            _viewModel.SearchText = textBox.Text;
+            _viewModel.Find();
         }
     }
 }

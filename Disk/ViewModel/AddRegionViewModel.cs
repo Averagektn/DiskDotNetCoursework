@@ -1,6 +1,7 @@
-﻿using Disk.Entity;
-using Disk.Repository.Implemetation;
+﻿using Disk.Repository.Implemetation;
+using Disk.View;
 using Disk.ViewModel.Common;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
@@ -13,6 +14,13 @@ namespace Disk.ViewModel
 
         public async void AddRegion(object? parameter)
         {
+            RegionName = RegionName.Trim().ToLower();
+            if (RegionName.Length == 0)
+            {
+                await ShowPopup("Не задано имя региона");
+                return;
+            }
+
             try
             {
                 await _addressRepository.AddRegion(new() { Name = RegionName });
@@ -22,6 +30,8 @@ namespace Disk.ViewModel
             {
                 await ShowPopup("Такой регион уже существует");
             }
+
+            Application.Current.Windows.OfType<AddRegionWindow>().First().Close();
         }
     }
 }

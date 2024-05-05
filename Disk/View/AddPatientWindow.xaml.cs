@@ -1,5 +1,6 @@
 ﻿using Disk.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Disk.View
 {
@@ -12,7 +13,7 @@ namespace Disk.View
             DataContext = _viewModel;
         }
 
-        private void RegionComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void RegionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _viewModel.OnRegionSelected();
         }

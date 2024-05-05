@@ -21,7 +21,18 @@ namespace Disk.Repository.Implemetation
 
         public async Task<Address> AddAddressIfNotExistsAsync(Address address)
         {
-            throw new NotImplementedException();
+            var exists = await _context.Addresses.Where(a => a.Corpus == address.Corpus && a.District == address.District 
+                    && a.Apartment == address.Apartment && a.House == address.House && a.Street == address.Street)
+                .FirstOrDefaultAsync();
+
+            if (exists is null)
+            {
+                var res = await _context.Addresses.AddAsync(address);
+                await _context.SaveChangesAsync();
+                return res.Entity;
+            }
+
+            return exists;
         }
 
         public async Task<Region> AddRegion(Region region)

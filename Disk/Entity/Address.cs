@@ -1,4 +1,6 @@
-﻿namespace Disk.Entity;
+﻿using Disk.Extension;
+
+namespace Disk.Entity;
 
 public partial class Address
 {
@@ -18,5 +20,5 @@ public partial class Address
 
     public virtual ICollection<Patient> Patients { get; set; } = [];
 
-    public override string ToString() => $"{Street} {House}-{Apartment}({Corpus})";
+    public override string ToString() => $"{Street.ToUpperFirstLetter()} {House}-{Apartment}({Corpus})";
 }

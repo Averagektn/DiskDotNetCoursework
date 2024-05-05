@@ -12,31 +12,39 @@ namespace Disk.ViewModel
         public Patient SelectedPatient { get; set; } = new();
 
         public ICommand AddPatient => new Command(ToAddPatient);
-        public ICommand Find => new Command(FindCommand);
-        private string _searchText = string.Empty;
-        public string SearchText { get => _searchText; set => SetProperty(ref _searchText, value); }
+        public string SearchText { get; set; } = string.Empty;
 
-        public List<Patient> PatientsCollection = [];
+        private List<Patient> _patientsCollection;
         public ObservableCollection<Patient> Patients { get; set; }
         private readonly PatientRepository _patientRepository = new();
 
         public PatientsViewModel()
         {
-            PatientsCollection = _patientRepository.GetPatientsAsync().Result;
-            Patients = new(PatientsCollection);
+            _patientsCollection = _patientRepository.GetPatientsAsync().Result;
+            Patients = new(_patientsCollection);
         }
 
-        public void ToAddPatient(object? parameter)
+        public async void ToAddPatient(object? parameter)
         {
             new AddPatientWindow().ShowDialog();
-            //PatientsCollection = await _patientRepository.GetPatientsAsync();
-            //Patients = new(PatientsCollection);
+
+            Patients.Clear();
+            _patientsCollection = await _patientRepository.GetPatientsAsync();
+            foreach (var patient in _patientsCollection)
+            {
+                Patients.Add(patient);
+            }
         }
 
-        public void FindCommand(object? parameter)
+        public void Find()
         {
-            Patients = new(PatientsCollection.Where(p => 
-                $"{p.Surname} {p.Name} {p.Patronymic}".Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)));
+            Patients.Clear();
+            var patientns = _patientsCollection.Where(p => 
+                $"{p.Surname} {p.Name} {p.Patronymic}".Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+            foreach(var patient in patientns)
+            {
+                Patients.Add(patient);
+            }
         }
     }
 }

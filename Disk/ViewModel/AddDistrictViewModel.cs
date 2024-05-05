@@ -1,7 +1,9 @@
 ﻿using Disk.Entity;
 using Disk.Repository.Implemetation;
+using Disk.View;
 using Disk.ViewModel.Common;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
@@ -10,7 +12,7 @@ namespace Disk.ViewModel
     {
         public Region SelectedRegion { get; set; } = new();
         private readonly AddressRepository _addressRepository = new();
-        public ICommand AddDistrictCommand => new Command(AddRegion);
+        public ICommand AddDistrictCommand => new Command(AddDistrict);
         public string DistrictName { get; set; } = string.Empty;
         public ObservableCollection<Region> Regions { get; set; }
 
@@ -20,8 +22,20 @@ namespace Disk.ViewModel
             Regions = new(regions);
         }
 
-        public async void AddRegion(object? parameter)
+        public async void AddDistrict(object? parameter)
         {
+            DistrictName = DistrictName.Trim().ToLower();
+            if (DistrictName.Length == 0)
+            {
+                await ShowPopup("Не задано имя района");
+                return;
+            }
+            if (SelectedRegion.Id == 0)
+            {
+                await ShowPopup("Не выбран регион");
+                return;
+            }
+
             try
             {
                 await _addressRepository.AddDistrict(new() { Name = DistrictName, Region = SelectedRegion.Id });
@@ -31,6 +45,8 @@ namespace Disk.ViewModel
             {
                 await ShowPopup("Такой район уже существует");
             }
+
+            Application.Current.Windows.OfType<AddDistrictWindow>().First().Close();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Windows.Controls;
+﻿using Disk.Extension;
 
 namespace Disk.Entity;
 
@@ -26,8 +26,8 @@ public partial class Doctor
 
     public virtual ICollection<TargetFile> TargetFiles { get; set; } = [];
 
-    public override string ToString() => 
-        $"{Surname[..1].ToUpper() + Surname[1..]} " +
-        $"{Name[..1].ToUpper() + Name[1..]} " +
-        $"{Patronymic?[..1].ToUpper() + Patronymic?[1..]}";
+    public override string ToString() =>
+        $"{Surname.ToUpperFirstLetter()} " +
+        $"{Name.ToUpperFirstLetter()} " +
+        $"{Patronymic?.ToUpperFirstLetter()}";
 }

@@ -16,9 +16,12 @@ namespace Disk.Repository.Implemetation
                 .ThenInclude(d => d.RegionNavigation)
                 .ToListAsync();
 
-        public async Task<int> AddPatientAsync(Patient patient)
+        public async Task<Patient> AddPatientAsync(Patient patient)
         {
-            throw new NotImplementedException();
+            var res = await _context.Patients.AddAsync(patient);
+            await _context.SaveChangesAsync();
+
+            return res.Entity;
         }
 
         public async Task AddCardAsync()

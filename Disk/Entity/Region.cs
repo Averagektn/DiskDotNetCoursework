@@ -1,4 +1,6 @@
-﻿namespace Disk.Entity;
+﻿using Disk.Extension;
+
+namespace Disk.Entity;
 
 public partial class Region
 {
@@ -8,5 +10,5 @@ public partial class Region
 
     public virtual ICollection<District> Districts { get; set; } = [];
 
-    public override string ToString() => Name;
+    public override string ToString() => Name.ToUpperFirstLetter();
 }
