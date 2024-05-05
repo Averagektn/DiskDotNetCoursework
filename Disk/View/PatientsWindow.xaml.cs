@@ -20,5 +20,10 @@ namespace Disk.View
             _viewModel.SearchText = textBox.Text;
             _viewModel.Find();
         }
+
+        private void PatientsDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _viewModel.ToPatientInfo();
+        }
     }
 }

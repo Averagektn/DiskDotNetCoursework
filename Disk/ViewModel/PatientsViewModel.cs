@@ -1,8 +1,10 @@
-﻿using Disk.Entity;
+﻿using Disk.AppSession;
+using Disk.Entity;
 using Disk.Repository.Implemetation;
 using Disk.View;
 using Disk.ViewModel.Common;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
@@ -11,11 +13,11 @@ namespace Disk.ViewModel
     {
         public Patient SelectedPatient { get; set; } = new();
 
-        public ICommand AddPatient => new Command(ToAddPatient);
+        public ICommand PatientClickCommand => new Command(ToAddPatient);
         public string SearchText { get; set; } = string.Empty;
+        public ObservableCollection<Patient> Patients { get; set; }
 
         private List<Patient> _patientsCollection;
-        public ObservableCollection<Patient> Patients { get; set; }
         private readonly PatientRepository _patientRepository = new();
 
         public PatientsViewModel()
@@ -34,6 +36,13 @@ namespace Disk.ViewModel
             {
                 Patients.Add(patient);
             }
+        }
+
+        public void ToPatientInfo()
+        {
+            CurrentSession.Patient = SelectedPatient;
+            Application.Current.Windows.OfType<PatientsWindow>().First().Close();
+            new PatientInfoWindow().Show();
         }
 
         public void Find()

@@ -27,7 +27,7 @@
                   HorizontalAlignment="Left"
                   TextChanged="SearchBox_TextChanged"
                   Text="{Binding SearchText}"/>
-        <DataGrid x:Name="patientsDataGrid" ItemsSource="{Binding Patients}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPatient}" IsReadOnly="True">
+        <DataGrid x:Name="PatientsDataGrid" MouseDoubleClick="PatientsDataGrid_MouseDoubleClick" ItemsSource="{Binding Patients}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPatient}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Имя" Binding="{Binding Name}" />
                 <DataGridTextColumn Width="1*" Header="Фамилия" Binding="{Binding Surname}" />
