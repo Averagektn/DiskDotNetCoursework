@@ -69,6 +69,15 @@
           BorderThickness="0,0,0,1"
           HorizontalAlignment="Left"
           Text="{Binding PhoneHome}"/>
+
+            <TextBlock Text="Номер карты" 
+           Margin="0,15"
+           HorizontalAlignment="Left"/>
+            <TextBox Padding="0,5"
+          Width="255"
+          BorderThickness="0,0,0,1"
+          HorizontalAlignment="Left"
+          Text="{Binding CardNumber}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center">

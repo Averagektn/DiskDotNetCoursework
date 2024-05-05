@@ -6,8 +6,102 @@
         xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:PatientInfoViewModel}"
         mc:Ignorable="d"
-        Title="PatientInfoWindow" Height="450" Width="800">
+        Title="PatientInfoWindow" Height="450" Width="1000">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="{Binding Card.Number}" Margin="10"/>
+            <TextBlock Text="{Binding Patient.Surname}" Margin="10"/>
+            <TextBlock Text="{Binding Patient.Name}" Margin="10"/>
+            <TextBlock Text="{Binding Patient.Patronymic}" Margin="10"/>
+            <TextBlock Text="{Binding Patient.PhoneMobile}" Margin="10"/>
+            <TextBlock Text="{Binding Patient.PhoneHome}" Margin="10"/>
+            <TextBlock Text="{Binding AddressInCountry}" Margin="10"/>
+            <TextBlock Text="{Binding AddressInRegion}" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Карточка:"/>
+            <TextBlock Text="{Binding Card.Number}"/>
+
+            <TextBlock Text="Противопоказания" Margin="0 10 0 0"/>
+            <DataGrid x:Name="ContraindicationsDataGrid" 
+                      MouseDoubleClick="ContraindicationsDataGrid_MouseDoubleClick" 
+                      ItemsSource="{Binding Contraindications}" 
+                      AutoGenerateColumns="False" 
+                      SelectedItem="{Binding SelectedAppointment}" 
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Привопоказание" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Диагнозы" Margin="0 10 0 0"/>
+            <DataGrid x:Name="DiagnosisesDataGrid" 
+                      MouseDoubleClick="DiagnosisesDataGrid_MouseDoubleClick" 
+                      ItemsSource="{Binding Diagnoses}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Диагноз" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <TextBlock Text="Ренгеновские снимки" Margin="0 10 0 0"/>
+            <DataGrid x:Name="XraysDataGrid" 
+                      MouseDoubleClick="XraysDataGrid_MouseDoubleClick" 
+                      ItemsSource="{Binding Xrays}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Расположение" Binding="{Binding FilePath}" />
+                    <DataGridTextColumn Width="1*" Header="Дата" Binding="{Binding Date}" />
+                    <DataGridTextColumn Width="1*" Header="Описание" Binding="{Binding Description}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Процедуры" Margin="0 10 0 0"/>
+            <DataGrid x:Name="ProceduresDataGrid" 
+                      MouseDoubleClick="ProceduresDataGrid_MouseDoubleClick" 
+                      ItemsSource="{Binding Procedures}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Назначено" Binding="{Binding AssignedByNavigation}" />
+                    <DataGridTextColumn Width="1*" Header="Дата" Binding="{Binding DateTime}" />
+                    <DataGridTextColumn Width="1*" Header="Наименование" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Операции" Margin="0 10 0 0"/>
+            <DataGrid x:Name="OperationsDataGrid" MouseDoubleClick="OperationsDataGrid_MouseDoubleClick" 
+                      ItemsSource="{Binding Operations}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Назначено" Binding="{Binding AsingnedByNavigation}" />
+                    <DataGridTextColumn Width="1*" Header="Дата" Binding="{Binding DateTime}" />
+                    <DataGridTextColumn Width="1*" Header="Наименование" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <TextBlock Text="Заметки" Margin="0 10 0 0"/>
+            <DataGrid x:Name="NotesDataGrid" MouseDoubleClick="NotesDataGrid_MouseDoubleClick" 
+                      ItemsSource="{Binding Notes}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Врач" Binding="{Binding DoctorNavigation}" />
+                    <DataGridTextColumn Width="1*" Header="Текст" Binding="{Binding Text}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3">
+            <TextBlock Text="Встречи"/>
+            <DataGrid x:Name="AppointmentsDataGrid" MouseDoubleClick="AppointmentsDataGrid_MouseDoubleClick" ItemsSource="{Binding AppointmentsWithDate}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="1*" Header="Врач" Binding="{Binding Appointment.DoctorNavigation}" />
+                    <DataGridTextColumn Width="1*" Header="Дата" Binding="{Binding Date}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Window>

@@ -26,6 +26,10 @@ namespace Disk.ViewModel
         private List<District> _districts;
         private List<Region> _regions;
 
+        // Card
+        private string _cardNumber = string.Empty;
+        public string CardNumber { get => _cardNumber.Trim(); set => SetProperty(ref _cardNumber, value); }
+
         // Patient
         private string _name = string.Empty;
         private string _surname = string.Empty;
@@ -99,9 +103,16 @@ namespace Disk.ViewModel
             }
             patient.Surname = Surname;
 
+            if (CardNumber.IsEmpty())
+            {
+                await ShowPopup("Не указан номер карты");
+                return;
+            }
+
             try
             {
                 await _patientRepository.AddPatientAsync(patient);
+                await _patientRepository.AddCardAsync(new() { Number = CardNumber, Patient = patient.Id });
                 await ShowPopup("Пациент успешно добавлен");
             }
             catch
