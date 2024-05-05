@@ -85,7 +85,7 @@ namespace Disk.ViewModel
 
         private void OnSettingsClick(object? parameter)
         {
-            //Application.Current.Windows.OfType<MenuWindow>().First().Hide();
+            Application.Current.Windows.OfType<MenuWindow>().First().Hide();
             new SettingsWindow().ShowDialog();
             Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }

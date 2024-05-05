@@ -30,7 +30,6 @@ namespace Disk.ViewModel
 
                 Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Hide();
                 new MenuWindow().ShowDialog();
-                Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Show();
             }
             catch (DoctorDuplicationException)
             {
