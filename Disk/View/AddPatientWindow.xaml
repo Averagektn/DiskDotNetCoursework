@@ -110,16 +110,40 @@
               HorizontalAlignment="Left"
               Text="{Binding Address.Street}"/>
 
-            <ComboBox 
+            <StackPanel Orientation="Horizontal">
+                <ComboBox 
                 Margin="0 15"
+                Width="200"
                 ItemsSource="{Binding Regions}" 
                 SelectedItem="{Binding SelectedRegion}" 
                 SelectionChanged="RegionComboBox_SelectionChanged"/>
 
-            <ComboBox 
+                <Button Content="+" Margin="10 20 10 20" Width="50"               
+                        Foreground="White"
+                        Background="Black"
+                        Command="{Binding AddRegionCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <ComboBox 
                 Margin="0 15"
+                Width="200"
                 ItemsSource="{Binding Districts}" 
                 SelectedItem="{Binding SelectedDistrict}"/>
+
+                <Button Content="+" Margin="10 20 10 20" Width="50"                
+                        Foreground="White"
+                        Background="Black"
+                        Command="{Binding AddDistrictCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
 
         </StackPanel>
 

@@ -8,6 +8,8 @@ namespace Disk.ViewModel
     public class AddPatientViewModel : BaseViewModel
     {
         public ICommand AddPatientCommand => new Command(AddPatient);
+        public ICommand AddRegionCommand => new Command(AddRegion);
+        public ICommand AddDistrictCommand => new Command(AddDistrict);
         public Patient Patient { get; set; } = new();
         public Address Address { get; set; } = new();
         public District SelectedDistrict { get; set; } = new();
@@ -23,10 +25,20 @@ namespace Disk.ViewModel
 
         public void OnRegionSelected()
         {
-            Console.WriteLine("A");
+
         }
 
         public void AddPatient(object? parameter)
+        {
+
+        }
+
+        public void AddRegion(object? parameter)
+        {
+
+        }
+
+        public void AddDistrict(object? parameter)
         {
 
         }
