@@ -2,6 +2,7 @@
 using Disk.Entity;
 using Disk.Repository.Exceptions;
 using Disk.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Disk.Repository.Implemetation
 {
@@ -11,12 +12,12 @@ namespace Disk.Repository.Implemetation
 
         public async Task<long> PerformRegistrationAsync(Doctor doctor)
         {
-            var a = _context
+            var doc = await _context
                 .Doctors
                 .Where(d => d.Name == doctor.Name && d.Surname == doctor.Surname && d.Patronymic == d.Patronymic 
                     && d.Password == doctor.Password)
-                .FirstOrDefault();
-            if (a is not null)
+                .FirstOrDefaultAsync();
+            if (doc is not null)
             {
                 throw new DoctorDuplicationException();
             }
@@ -29,7 +30,13 @@ namespace Disk.Repository.Implemetation
 
         public async Task<long> PerformAuthorizationAsync(Doctor doctor)
         {
-            throw new NotImplementedException();
+            var doc = await _context
+                .Doctors
+                .Where(d => d.Name == doctor.Name && d.Surname == doctor.Surname && d.Patronymic == d.Patronymic
+                    && d.Password == doctor.Password)
+                .FirstOrDefaultAsync() ?? throw new DoctorNotFound();
+
+            return doc.Id;
         }
 
         public async Task UpdateDoctorAsync(Doctor doctor)

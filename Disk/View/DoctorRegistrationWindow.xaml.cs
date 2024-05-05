@@ -6,9 +6,6 @@ using System.Windows.Controls;
 
 namespace Disk.View
 {
-    /// <summary>
-    /// Interaction logic for DoctorRegistrationWindow.xaml
-    /// </summary>
     public partial class DoctorRegistrationWindow : Window
     {
         private readonly DoctorRegistrationViewModel _viewModel = new();
@@ -19,7 +16,7 @@ namespace Disk.View
             DataContext = _viewModel;
         }
 
-        private async void LoginBtn_Click(object sender, RoutedEventArgs e)
+        private async Task<string> GetHashString()
         {
             byte[] inputBytes = Encoding.UTF8.GetBytes(PasswordBox.Password.Trim());
             if (inputBytes.Length < 8)
@@ -35,14 +32,21 @@ namespace Disk.View
                 builder.Append(hashBytes[i].ToString("X2"));
             }
 
-            await _viewModel.PerformRegistration(builder.ToString());
+            return builder.ToString();
         }
 
-        private void TextBlock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Hide();
-            new DoctorAuthorizationWindow().ShowDialog();
-            Application.Current.MainWindow.Show();
+            var passwordHash = await GetHashString();
+
+            await _viewModel.PerformAuthorization(passwordHash);
+        }
+
+        private async void RegistrationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var passwordHash = await GetHashString();
+
+            await _viewModel.PerformRegistration(passwordHash);
         }
     }
 }

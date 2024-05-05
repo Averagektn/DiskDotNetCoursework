@@ -22,8 +22,6 @@ namespace Disk.ViewModel
 
         public MenuViewModel()
         {
-            throw new Exception();
-
             if (!Directory.Exists(Settings.MAIN_DIR_PATH))
             {
                 Directory.CreateDirectory(Settings.MAIN_DIR_PATH);
