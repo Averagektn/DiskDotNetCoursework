@@ -53,7 +53,7 @@ namespace Disk.ViewModel
                 Application.Current.Windows.OfType<DoctorAuthenticationWindow>().First().Hide();
                 new MenuWindow().ShowDialog();
             }
-            catch (DoctorNotFound)
+            catch (DoctorNotFoundException)
             {
                 await ShowPopup("Такого врача не существует");
             }

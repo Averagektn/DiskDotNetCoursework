@@ -17,4 +17,6 @@ public partial class Address
     public virtual District DistrictNavigation { get; set; } = null!;
 
     public virtual ICollection<Patient> Patients { get; set; } = [];
+
+    public override string ToString() => $"{Street} {House}-{Apartment}({Corpus})";
 }

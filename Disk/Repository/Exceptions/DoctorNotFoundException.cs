@@ -1,6 +1,6 @@
 ﻿namespace Disk.Repository.Exceptions
 {
-    public class DoctorNotFound : Exception
+    public class DoctorNotFoundException : Exception
     {
     }
 }

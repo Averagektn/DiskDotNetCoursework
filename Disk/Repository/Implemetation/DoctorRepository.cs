@@ -32,7 +32,7 @@ namespace Disk.Repository.Implemetation
             await _context.Doctors
                 .Where(d => d.Name == doctor.Name && d.Surname == doctor.Surname && d.Patronymic == d.Patronymic
                     && d.Password == doctor.Password)
-                .FirstOrDefaultAsync() ?? throw new DoctorNotFound();
+                .FirstOrDefaultAsync() ?? throw new DoctorNotFoundException();
 
 /*
         public async Task<Doctor> GetDoctorById(long id) 
