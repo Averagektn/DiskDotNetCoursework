@@ -38,6 +38,11 @@ namespace Disk.Repository.Implemetation
         public async Task<Doctor> GetDoctorById(long id) 
             => await _context.Doctors.Where(d => d.Id == id).FirstOrDefaultAsync() ?? throw new DoctorNotFound();*/
 
+        public async Task<bool> IsMapExists(string mapName)
+        {
+            return await _context.Maps.AnyAsync(m => m.Name == mapName);
+        }
+
         public async Task UpdateDoctorAsync(Doctor doctor)
         {
             throw new NotImplementedException();
@@ -45,7 +50,8 @@ namespace Disk.Repository.Implemetation
 
         public async Task AddMapAsync(Map map)
         {
-            throw new NotImplementedException();
+            await _context.Maps.AddAsync(map);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddTargetFileAsync(TargetFile targetFile)

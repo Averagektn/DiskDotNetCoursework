@@ -72,7 +72,7 @@ namespace Disk.ViewModel
         private void OnMapContructorClick(object? parameter)
         {
             Application.Current.Windows.OfType<MenuWindow>().First().Hide();
-            new MapCreator().ShowDialog();
+            new EnterMapNameWindow().ShowDialog();
             Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
 

@@ -1,5 +1,9 @@
-﻿using Disk.Data.Impl;
+﻿using Disk.AppSession;
+using Disk.Data.Impl;
+using Disk.Entity;
+using Disk.Repository.Implemetation;
 using Disk.Visual.Impl;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -7,11 +11,9 @@ using Settings = Disk.Properties.Config.Config;
 
 namespace Disk
 {
-    /// <summary>
-    /// Interaction logic for MapCreator.xaml
-    /// </summary>
     public partial class MapCreator : Window
     {
+        private readonly DoctorRepository _doctorRepository = new();
         public int MapId { get; set; } = Settings.Default.MAP_ID;
 
         private static int IniWidth => Settings.Default.SCREEN_INI_WIDTH;
@@ -20,6 +22,7 @@ namespace Disk
         private readonly List<NumberedTarget> _targets = [];
 
         private Target? _movingTarget;
+        public string MapName { get; set; } = string.Empty;
 
         public MapCreator()
         {
@@ -55,21 +58,43 @@ namespace Disk
             }
         }
 
-        private void OnClose(object? sender, CancelEventArgs e)
+        private async void OnClose(object? sender, CancelEventArgs e)
         {
             if (_targets.Count != 0)
             {
                 using var writer = Logger.GetLogger($"maps\\map_{MapId++}.map");
+                var centers = new List<Point2D<float>>();
 
                 foreach (var target in _targets)
                 {
                     writer.LogLn(new Point2D<float>(
                         (float)(target.Center.X / ActualWidth),
                         (float)(target.Center.Y / ActualHeight)));
+
+                    centers.Add(new Point2D<float>(
+                        (float)(target.Center.X / ActualWidth),
+                        (float)(target.Center.Y / ActualHeight)));
                 }
 
                 Settings.Default.MAP_ID = MapId;
                 Settings.Default.Save();
+
+                var map = new Map()
+                {
+                    CoordinatesJson = JsonConvert.SerializeObject(centers),
+                    CreatedAt = DateTime.Now.ToShortDateString(),
+                    CreatedBy = CurrentSession.Doctor.Id,
+                    Name = MapName
+                };
+
+                try
+                {
+                    await _doctorRepository.AddMapAsync(map);
+                }
+                catch
+                {
+                    Close();
+                }
             }
         }
 
