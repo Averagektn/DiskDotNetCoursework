@@ -24,19 +24,21 @@ namespace Disk.Repository.Implemetation
             return res.Entity;
         }
 
-        public async Task AddCardAsync()
+        public async Task AddCardAsync(Card card)
         {
-            throw new NotImplementedException();
+            await _context.Cards.AddAsync(card);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdatePatientAsync()
+        public async Task<Card> GetCardByPatientIdAsync(long patientId)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task AddAddressAsync()
-        {
-            throw new NotImplementedException();
+            return await _context.Cards
+                .Where(c => c.Patient == patientId)
+                .Include(c => c.M2mCardDiagnoses)
+                    .ThenInclude(m2m => m2m.DiagnosisNavigation)
+                .Include(c => c.Contraindications)
+                .Include(c => c.Xrays)
+                .FirstAsync();
         }
 
         public async Task AddContraindicationAsync(Contraindication contraindication)
@@ -57,6 +59,21 @@ namespace Disk.Repository.Implemetation
         public async Task CloseDiagnosisAsync(Diagnosis diagnosis)
         {
 
+        }
+
+        public async Task<List<Contraindication>> GetContraindicationsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task GetXraysAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task GetDiagnosesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

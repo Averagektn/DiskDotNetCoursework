@@ -24,7 +24,7 @@ namespace Disk.Repository.Implemetation
             throw new NotImplementedException();
         }
 
-        public async Task<Report> GetReportAsync(long sessionId)
+        public async Task<List<Report>> GetReportAsync(long appointmentId)
         {
             throw new NotImplementedException();
         }

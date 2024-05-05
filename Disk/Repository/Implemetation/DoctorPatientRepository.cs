@@ -8,17 +8,32 @@ namespace Disk.Repository.Implemetation
     {
         private readonly DiskContext _context = new();
 
-        public async Task<int> AssignAppointmentAsync()
+        public async Task<int> AssignAppointmentAsync(Appointment appointment)
         {
             throw new NotImplementedException();
         }
 
-        public async Task AssignProcedureAsync()
+        public async Task AssignProcedureAsync(Procedure procedure)
         {
             throw new NotImplementedException();
         }
 
         public async Task AddNoteAsync(Note note)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Procedure>> GetProceduresAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Operation>> GetOperationsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Note>> GetNotesAsync()
         {
             throw new NotImplementedException();
         }

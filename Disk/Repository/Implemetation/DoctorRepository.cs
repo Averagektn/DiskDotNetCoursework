@@ -39,11 +39,6 @@ namespace Disk.Repository.Implemetation
             return await _context.Maps.AnyAsync(m => m.Name == mapName);
         }
 
-        public async Task UpdateDoctorAsync(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task AddMapAsync(Map map)
         {
             await _context.Maps.AddAsync(map);

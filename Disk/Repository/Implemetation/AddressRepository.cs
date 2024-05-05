@@ -50,5 +50,17 @@ namespace Disk.Repository.Implemetation
 
             return res.Entity;
         }
+
+        public async Task<Address> GetAddressByPatientIdAsync(long patientId)
+        {
+            var patient = await _context.Patients
+                .Where(p => p.Id == patientId)
+                .Include(p => p.AddressNavigation)
+                .ThenInclude(a => a.DistrictNavigation)
+                .ThenInclude(d => d.RegionNavigation)
+                .FirstAsync();
+
+            return patient.AddressNavigation;
+        }
     }
 }
