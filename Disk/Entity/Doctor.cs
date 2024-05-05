@@ -4,13 +4,13 @@ public partial class Doctor
 {
     public long Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; set; } = string.Empty;
 
-    public string Surname { get; set; } = null!;
+    public string Surname { get; set; } = string.Empty;
 
     public string? Patronymic { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string Password { get; set; } = string.Empty;
 
     public virtual ICollection<Appointment> Appointments { get; set; } = [];
 

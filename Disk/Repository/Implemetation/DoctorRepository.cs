@@ -1,5 +1,6 @@
 ﻿using Disk.Db.Context;
 using Disk.Entity;
+using Disk.Repository.Exceptions;
 using Disk.Repository.Interface;
 
 namespace Disk.Repository.Implemetation
@@ -8,12 +9,25 @@ namespace Disk.Repository.Implemetation
     {
         private readonly DiskContext _context = new();
 
-        public async Task<int> PerformRegistrationAsync(Doctor doctor)
+        public async Task<long> PerformRegistrationAsync(Doctor doctor)
         {
-            throw new NotImplementedException();
+            var a = _context
+                .Doctors
+                .Where(d => d.Name == doctor.Name && d.Surname == doctor.Surname && d.Patronymic == d.Patronymic 
+                    && d.Password == doctor.Password)
+                .FirstOrDefault();
+            if (a is not null)
+            {
+                throw new DoctorDuplicationException();
+            }
+
+            var res = await _context.AddAsync(doctor);
+            await _context.SaveChangesAsync();
+
+            return res.Entity.Id;
         }
 
-        public async Task<int> PerformAuthorizationAsync(Doctor doctor)
+        public async Task<long> PerformAuthorizationAsync(Doctor doctor)
         {
             throw new NotImplementedException();
         }
