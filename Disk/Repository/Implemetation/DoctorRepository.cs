@@ -34,10 +34,6 @@ namespace Disk.Repository.Implemetation
                     && d.Password == doctor.Password)
                 .FirstOrDefaultAsync() ?? throw new DoctorNotFoundException();
 
-/*
-        public async Task<Doctor> GetDoctorById(long id) 
-            => await _context.Doctors.Where(d => d.Id == id).FirstOrDefaultAsync() ?? throw new DoctorNotFound();*/
-
         public async Task<bool> IsMapExists(string mapName)
         {
             return await _context.Maps.AnyAsync(m => m.Name == mapName);
@@ -56,7 +52,8 @@ namespace Disk.Repository.Implemetation
 
         public async Task AddTargetFileAsync(TargetFile targetFile)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(targetFile);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Appointment>> GetAppointmentsAsync()

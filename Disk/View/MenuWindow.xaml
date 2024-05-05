@@ -36,8 +36,8 @@
 
         <Viewbox Grid.Row="1" Grid.Column="1">
             <Button 
-                Command="{Binding StartClick}" 
-                Content="{x:Static lang:Localization.Menu_StartGame}"
+                Command="{Binding AddTargetCommand}" 
+                Content="Добавить мишень"
                 Foreground="White"
                 Background="Black">
                 <Button.Style>

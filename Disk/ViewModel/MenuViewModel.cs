@@ -17,7 +17,7 @@ namespace Disk.ViewModel
         public ICommand ToPatientsClick => new Command(OnPatientsClick);
         public ICommand MapConstructorClick => new Command(OnMapContructorClick);
         public ICommand SettingsClick => new Command(OnSettingsClick);
-        public ICommand StartClick => new Command(OnStartClick);
+        public ICommand AddTargetCommand => new Command(OnAddTargetClick);
         public ICommand CalibrationClick => new Command(OnCalibrationClick);
 
         private static Settings Settings => Settings.Default;
@@ -76,10 +76,10 @@ namespace Disk.ViewModel
             Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
 
-        private void OnStartClick(object? parameter)
+        private void OnAddTargetClick(object? parameter)
         {
             Application.Current.Windows.OfType<MenuWindow>().First().Hide();
-            new UserDataForm().ShowDialog();
+            new AddTargetWindow().ShowDialog();
             Application.Current.Windows.OfType<MenuWindow>().First().Show();
         }
 

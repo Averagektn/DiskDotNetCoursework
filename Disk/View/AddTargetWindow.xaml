@@ -1,0 +1,56 @@
+﻿<Window x:Class="Disk.View.AddTargetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:AddTargetViewModel}"
+        mc:Ignorable="d"
+        Title="AddTargetWindow" Height="250" Width="300">
+    <Window.Resources>
+        <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
+    </Window.Resources>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Путь к файлу" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="0,5"
+              Width="255"
+              HorizontalAlignment="Left"
+              Text="{Binding FileName}"/>
+            <Button Content="..." Command="{Binding OpenFileManagerCommand}"             Foreground="White"
+                 Background="Black"
+                 Margin="0,25"
+                 Height="20"
+                 Width="20">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+
+
+        <Button Content="Добавить" Command="{Binding AddTargetCommand}"                    
+                Foreground="White"
+                    Background="Black"
+                    Margin="0,25"
+                    Height="35"
+                    Width="250">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+            </Button.Style>
+        </Button>
+
+        <Popup Placement="Center" 
+                   AllowsTransparency="True" 
+                   PopupAnimation="Fade" 
+                   IsOpen="{Binding IsShowPopup}">
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="6" Padding="10">
+                <TextBlock Text="{Binding PopupMessage}" />
+            </Border>
+        </Popup>
+    </StackPanel>
+</Window>
