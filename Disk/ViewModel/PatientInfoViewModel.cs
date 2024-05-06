@@ -90,9 +90,16 @@ namespace Disk.ViewModel
             }
         }
 
-        public void OnContraidicationClick()
+        public async void OnContraidicationClick()
         {
+            new AddContraindicationWindow().ShowDialog();
 
+            Contraindications.Clear();
+            var contraindications = await _patientRepository.GetContraindicationsAsync(Card.Id);
+            foreach (var contraindication in contraindications)
+            {
+                Contraindications.Add(contraindication);
+            }
         }
 
         public void OnOperationClick()
@@ -121,12 +128,7 @@ namespace Disk.ViewModel
             {
                 MessageBoxResult result = MessageBox.Show("Начать новый сеанс?", "Подтверждение",
                     MessageBoxButton.YesNo, MessageBoxImage.Question);
-
                 if (result == MessageBoxResult.Yes)
-                {
-
-                }
-                else if (result == MessageBoxResult.No)
                 {
 
                 }

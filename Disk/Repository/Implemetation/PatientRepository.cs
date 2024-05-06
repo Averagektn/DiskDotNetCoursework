@@ -43,7 +43,8 @@ namespace Disk.Repository.Implemetation
 
         public async Task AddContraindicationAsync(Contraindication contraindication)
         {
-            throw new NotImplementedException();
+            await _context.Contraindications.AddAsync(contraindication);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddXrayAsync(Xray xray)
