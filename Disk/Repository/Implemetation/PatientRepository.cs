@@ -56,9 +56,11 @@ namespace Disk.Repository.Implemetation
             throw new NotImplementedException();
         }
 
-        public async Task CloseDiagnosisAsync(Diagnosis diagnosis)
+        public async Task CloseDiagnosisAsync(M2mCardDiagnosis diagnosis)
         {
-
+            var found = await _context.M2mCardDiagnoses.Where(d => d.Card == diagnosis.Card && d.Diagnosis == diagnosis.Diagnosis).FirstAsync();
+            found.DiagnosisFinish = diagnosis.DiagnosisFinish;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Contraindication>> GetContraindicationsAsync(long cardId)

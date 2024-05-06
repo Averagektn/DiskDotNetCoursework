@@ -41,9 +41,12 @@ namespace Disk.ViewModel
 
         public void ToPatientInfo(object? parameter)
         {
-            CurrentSession.Patient = SelectedPatient;
-            Application.Current.Windows.OfType<PatientsWindow>().First().Close();
-            new PatientInfoWindow().ShowDialog();
+            if (SelectedPatient.Id != default)
+            {
+                CurrentSession.Patient = SelectedPatient;
+                Application.Current.Windows.OfType<PatientsWindow>().First().Close();
+                new PatientInfoWindow().ShowDialog();
+            }
         }
 
         public void Find()

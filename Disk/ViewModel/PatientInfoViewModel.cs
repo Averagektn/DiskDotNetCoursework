@@ -18,6 +18,7 @@ namespace Disk.ViewModel
         public ObservableCollection<Operation> Operations { get; set; } 
         public ObservableCollection<Procedure> Procedures { get; set; }
         public ObservableCollection<Note> Notes { get; set; }
+
         public ICommand StartAppointmentCommand => new Command(StartAppointment);
 
         public Appointment SelectedAppointment { get; set; } = new();
@@ -64,6 +65,34 @@ namespace Disk.ViewModel
             else if (result == MessageBoxResult.No)
             {
                 
+            }
+        }
+
+        public async void OnDiagnosisClick()
+        {
+            if (SelectedDiagnosis.Diagnosis == default)
+            {
+                return;
+            }
+
+            if (SelectedDiagnosis.DiagnosisFinish is null)
+            {
+                MessageBoxResult result = MessageBox.Show("Начать новый сеанс?", "Подтверждение",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+
+                }
+                else if (result == MessageBoxResult.No)
+                {
+
+                }
+            }
+            else
+            {
+                SelectedDiagnosis.DiagnosisFinish = DateTime.Now.ToShortDateString();
+                await _patientRepository.CloseDiagnosisAsync(SelectedDiagnosis);
             }
         }
     }
