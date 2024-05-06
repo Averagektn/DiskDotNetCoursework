@@ -405,3 +405,5 @@ FodyWeavers.xsd
 *.doc
 /Disk/Db/disk.db
 *.png
+/Disk/Db/disk.db-shm
+/Disk/Db/disk.db-wal
