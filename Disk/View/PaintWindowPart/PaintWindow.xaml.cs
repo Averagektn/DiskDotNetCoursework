@@ -16,6 +16,7 @@ namespace Disk
     {
         private void ShotTimerElapsed(object? sender, EventArgs e)
         {
+            // PathToTarget
             if (Target is not null && User is not null)
             {
                 var shotScore = Target.ReceiveShot(User.Shot());
@@ -75,6 +76,7 @@ namespace Disk
             Title = $"{Localization.Paint_Score}: {Score}";
             TblScore.Text = $"{Localization.Paint_Score}: {Score}";
 
+            // PathInTarget
             if (Target?.IsFull ?? false)
             {
                 var newCenter = MapReader?.GetXY();
@@ -118,7 +120,7 @@ namespace Disk
 
         private void NetworkReceive()
         {
-            try
+/*            try
             {
                 using var con = Connection.GetConnection(IPAddress.Parse(Settings.IP), Settings.PORT);
 
@@ -131,13 +133,16 @@ namespace Disk
             }
             catch
             {
+                // SAVE TO DB
                 MessageBox.Show(Localization.Paint_ConnectionLost);
                 Application.Current.Dispatcher.BeginInvoke(new Action(Close));
-            }
+            }*/
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            User = new(DbTargetFilePath, new(SCREEN_INI_CENTER_X, SCREEN_INI_CENTER_Y), Settings.USER_INI_SPEED,
+                new(50, 50), SCREEN_INI_SIZE);
             Converter = new(SCREEN_INI_SIZE, new(X_ANGLE_SIZE, Y_ANGLE_SIZE));
 
             if (!Directory.Exists(CurrPath))

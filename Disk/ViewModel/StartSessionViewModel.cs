@@ -50,7 +50,12 @@ namespace Disk.ViewModel
                 return;
             }
 
-            var session = new Session() { Appointment = CurrentSession.Appointment.Id, Date = DateTime.Now.ToString(), LogFilePath = string.Empty, Map = SelectedMap.Id };
+            var session = new Session() { Appointment = CurrentSession.Appointment.Id, Date = DateTime.Now.ToString(),
+                LogFilePath =
+                $"{Settings.MAIN_DIR_PATH}{Path.DirectorySeparatorChar}" +
+                $"{Patient.Surname} {Patient.Name}{Path.DirectorySeparatorChar}" +
+                $"{DateTime.Now}", 
+                Map = SelectedMap.Id };
             await _staticticsRepository.StartSessionAsync(session);
             CurrentSession.Session = session; 
 
