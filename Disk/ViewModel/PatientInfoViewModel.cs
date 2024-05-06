@@ -68,6 +68,39 @@ namespace Disk.ViewModel
             }
         }
 
+        public void OnAppointmentClick()
+        {
+            if (SelectedAppointment.Id == default)
+            {
+                return;
+            }
+        }
+
+        public void OnXrayClick()
+        {
+
+        }
+
+        public void OnContraidicationClick()
+        {
+
+        }
+
+        public void OnOperationClick()
+        {
+
+        }
+
+        public void OnProcedureClick()
+        {
+
+        }
+
+        public void OnNoteClick()
+        {
+
+        }
+
         public async void OnDiagnosisClick()
         {
             if (SelectedDiagnosis.Diagnosis == default)
