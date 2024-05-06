@@ -407,3 +407,4 @@ FodyWeavers.xsd
 *.png
 /Disk/Db/disk.db-shm
 /Disk/Db/disk.db-wal
+*.jpg
