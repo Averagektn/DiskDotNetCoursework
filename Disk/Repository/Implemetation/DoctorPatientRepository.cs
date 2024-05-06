@@ -16,7 +16,8 @@ namespace Disk.Repository.Implemetation
 
         public async Task AssignProcedureAsync(Procedure procedure)
         {
-            throw new NotImplementedException();
+            await _context.Procedures.AddAsync(procedure);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AssignOperationAsync(Operation operation)

@@ -114,12 +114,19 @@ namespace Disk.ViewModel
             }
         }
 
-        public void OnProcedureClick()
+        public async void OnProcedureClick()
         {
+            new AddProcedureWindow().ShowDialog();
 
+            Procedures.Clear();
+            var procedures = await _doctorPatientRepository.GetProceduresAsync(CurrentSession.Patient.Id);
+            foreach (var procedure in procedures)
+            {
+                Procedures.Add(procedure);
+            }
         }
 
-        public void OnNoteClick()
+        public async void OnNoteClick()
         {
 
         }
