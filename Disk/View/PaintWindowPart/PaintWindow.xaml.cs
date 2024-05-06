@@ -1,5 +1,8 @@
-﻿using Disk.Calculations.Impl.Converters;
+﻿using Disk.AppSession;
+using Disk.Calculations.Impl.Converters;
 using Disk.Data.Impl;
+using Disk.Entity;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -19,7 +22,10 @@ namespace Disk
             // PathToTarget
             if (Target is not null && User is not null)
             {
-                var shotScore = Target.ReceiveShot(User.Shot());
+                var shot = User.Shot();
+                var shotScore = Target.ReceiveShot(shot);
+                var a = Converter.ToAngle_FromWnd(shot);
+                PathToTargetCoords.Add(a);
 
                 if (shotScore != 0 && Stopwatch.IsRunning)
                 {
@@ -52,6 +58,20 @@ namespace Disk
                         var avgSpeed = distance / time;
                         var approachSpeed = StartPoint.GetDistance(touchPoint!) / time;
 
+                        
+                        var ptt = new PathToTarget() 
+                        { 
+                            AngleDistance = distance, 
+                            AngleSpeed = avgSpeed,
+                            ApproachSpeed = approachSpeed, 
+                            CoordinatesJson = JsonConvert.SerializeObject(PathToTargetCoords), 
+                            Num = TargetID, 
+                            Session = CurrentSession.Session.Id, 
+                            Time = time
+                        };
+                        staticticsRepository.AddPathToTargetAsync(ptt).Wait();
+                        PathToTargetCoords = [];
+
                         var message =
                             $"""
                             {Localization.Paint_Time}: {time:F2}
@@ -79,7 +99,16 @@ namespace Disk
             // PathInTarget
             if (Target?.IsFull ?? false)
             {
-                var newCenter = MapReader?.GetXY();
+                var pit = new PathInTarget()
+                {
+                    CoordinatesJson = JsonConvert.SerializeObject(PathInTargetCoords),
+                    Session = CurrentSession.Session.Id,
+                    TargetId = TargetID,
+                };
+                staticticsRepository.AddPathInTargetAsync(pit).Wait();
+
+                PathInTargetCoords = [];
+                var newCenter = DbMapCenters[TargetID];
                 Target.Reset();
 
                 if (newCenter is null)
@@ -120,7 +149,7 @@ namespace Disk
 
         private void NetworkReceive()
         {
-/*            try
+            try
             {
                 using var con = Connection.GetConnection(IPAddress.Parse(Settings.IP), Settings.PORT);
 
@@ -133,10 +162,9 @@ namespace Disk
             }
             catch
             {
-                // SAVE TO DB
                 MessageBox.Show(Localization.Paint_ConnectionLost);
                 Application.Current.Dispatcher.BeginInvoke(new Action(Close));
-            }*/
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -175,6 +203,7 @@ namespace Disk
             User.OnShot += (p) => UserLogAng.LogLn(Converter?.ToAngle_FromWnd(p));
             User.OnShot += (p) => UserLogCen.LogLn(Converter?.ToLogCoord(p));
             User.OnShot += (p) => UserMovementLog.LogLn(Converter?.ToAngle_FromWnd(p));
+            User.OnShot += (p) => AllPath.Add(Converter.ToAngle_FromWnd(p));
 
             Drawables.Add(Target); Drawables.Add(User);
             Scalables.Add(Target); Scalables.Add(User); Scalables.Add(Converter);

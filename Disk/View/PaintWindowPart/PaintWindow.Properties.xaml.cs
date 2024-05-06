@@ -1,5 +1,6 @@
 ﻿using Disk.Calculations.Impl.Converters;
 using Disk.Data.Impl;
+using Disk.Repository.Implemetation;
 using Disk.ViewModel;
 using Disk.Visual.Impl;
 using Disk.Visual.Interface;
@@ -19,6 +20,9 @@ namespace Disk
     {
         public List<Point2DF> PathToTargetCoords = [];
         public List<Point2DF> PathInTargetCoords = [];
+        public List<Point2DF> AllPath = [];
+
+        private readonly StaticticsRepository staticticsRepository = new();
 
         public List<Point2DF> DbMapCenters = [];
         public string DbTargetFilePath = string.Empty;

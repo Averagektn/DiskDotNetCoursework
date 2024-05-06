@@ -1,6 +1,9 @@
-﻿using Disk.Calculations.Impl;
+﻿using Disk.AppSession;
+using Disk.Calculations.Impl;
 using Disk.Calculations.Impl.Converters;
 using Disk.Data.Impl;
+using Disk.Entity;
+using Disk.View;
 using Disk.Visual.Impl;
 using System.ComponentModel;
 using System.Drawing;
@@ -19,7 +22,6 @@ namespace Disk
 {
     public partial class PaintWindow : Window
     {
-        // TO session_result
         private void ShowStats()
         {
             using var userAngleReader = FileReader<float>.Open(UsrAngLog, Settings.LOG_SEPARATOR);
@@ -39,9 +41,20 @@ namespace Disk
                  {Localization.Paint_Dispersion}: {dispersion}
                  {Localization.Paint_StandartDeviation}: {deviation}
                  """);
+
+                var sres = new SessionResult()
+                {
+                    Id = CurrentSession.Session.Id,
+                    Deviation = (deviation.XDbl + deviation.YDbl) / 2,
+                    MathExp = (mx.XDbl + mx.YDbl) / 2,
+                    Dispersion = (dispersion.XDbl + dispersion.YDbl) / 2,
+                    Score = Score
+                };
+                staticticsRepository.AddSessionResultAsync(sres).Wait();
             }
 
             MessageBox.Show(Localization.Paint_Over);
+            new ReportWindow().ShowDialog();
         }
 
         private void StopGame()
@@ -73,8 +86,7 @@ namespace Disk
 
         private void OnClosing(object? sender, CancelEventArgs e) 
         { 
-            // if terminated delete all session results
-            StopGame(); 
+            StopGame();
         }
 
         private void OnSizeChanged(object sender, RoutedEventArgs e)
