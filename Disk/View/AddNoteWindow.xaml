@@ -1,0 +1,44 @@
+﻿<Window x:Class="Disk.View.AddNoteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddNoteViewModel}"
+        mc:Ignorable="d"
+        Title="AddNoteWindow" Height="200" Width="300">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
+    </Window.Resources>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Заметка" 
+               Margin="0,15"
+               HorizontalAlignment="Left"/>
+        <TextBox Padding="0,5"
+              Width="255"
+              BorderThickness="0,0,0,1"
+              HorizontalAlignment="Left"
+              Text="{Binding NoteText}"/>
+
+        <Button Content="Добавить" Command="{Binding AddNoteCommand}"                    
+                Foreground="White"
+                    Background="Black"
+                    Margin="0,25"
+                    Height="35"
+                    Width="250">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource GradientButtonStyle}"/>
+            </Button.Style>
+        </Button>
+
+        <Popup Placement="Center" 
+                   AllowsTransparency="True" 
+                   PopupAnimation="Fade" 
+                   IsOpen="{Binding IsShowPopup}">
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="6" Padding="10">
+                <TextBlock Text="{Binding PopupMessage}" />
+            </Border>
+        </Popup>
+    </StackPanel>
+</Window>

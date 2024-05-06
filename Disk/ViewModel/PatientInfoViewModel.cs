@@ -128,7 +128,14 @@ namespace Disk.ViewModel
 
         public async void OnNoteClick()
         {
+            new AddNoteWindow().ShowDialog();
 
+            Notes.Clear();
+            var notes = await _doctorPatientRepository.GetNotesAsync(CurrentSession.Patient.Id);
+            foreach (var note in notes)
+            {
+                Notes.Add(note);
+            }
         }
 
         public async void OnDiagnosisClick()

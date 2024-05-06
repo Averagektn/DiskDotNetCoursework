@@ -28,7 +28,8 @@ namespace Disk.Repository.Implemetation
 
         public async Task AddNoteAsync(Note note)
         {
-            throw new NotImplementedException();
+            await _context.Notes.AddAsync(note);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Procedure>> GetProceduresAsync(long patientId)
