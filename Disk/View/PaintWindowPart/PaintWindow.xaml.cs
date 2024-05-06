@@ -108,15 +108,16 @@ namespace Disk
                 staticticsRepository.AddPathInTargetAsync(pit).Wait();
 
                 PathInTargetCoords = [];
-                var newCenter = DbMapCenters[TargetID];
+                
                 Target.Reset();
 
-                if (newCenter is null)
+                if (DbMapCenters.Count <= DbMapIndex)
                 {
                     OnStopClick(this, new());
                 }
                 else if (Converter is not null)
                 {
+                    var newCenter = DbMapCenters[DbMapIndex++];
                     var wndCenter = Converter.ToWnd_FromRelative(newCenter);
                     Target.Move(wndCenter);
 
@@ -178,7 +179,7 @@ namespace Disk
                 Directory.CreateDirectory(CurrPath);
             }
 
-            if (DbMapCenters.Count > DbMapIndex)
+            if (DbMapCenters.Count > DbMapIndex - 1)
             {
                 var center = DbMapCenters[DbMapIndex++];
                 Target = new(Converter.ToWnd_FromRelative(center),

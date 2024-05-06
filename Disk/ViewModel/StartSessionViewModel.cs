@@ -28,7 +28,7 @@ namespace Disk.ViewModel
         private static Settings Settings => Settings.Default;
 
         private readonly DoctorPatientRepository _doctorPatientRepository = new();
-        private readonly StaticticsRepository _staticticsRepository = new();
+        private readonly StatisticsRepository _staticticsRepository = new();
 
         public StartSessionViewModel()
         {

@@ -45,7 +45,7 @@
             <TextBlock Text="{Binding Card.Number}"/>
 
             <TextBlock Text="Противопоказания" Margin="0 10 0 0"/>
-            <DataGrid x:Name="ContraindicationsDataGrid" 
+            <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="ContraindicationsDataGrid" 
                       Margin="5 0"
                       MouseDoubleClick="ContraindicationsDataGrid_MouseDoubleClick" 
                       ItemsSource="{Binding Contraindications}" 
@@ -57,7 +57,7 @@
             </DataGrid>
 
             <TextBlock Text="Диагнозы" Margin="0 10 0 0"/>
-            <DataGrid x:Name="DiagnosisesDataGrid" 
+            <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="DiagnosisesDataGrid" 
                       Margin="5 0"
                       MouseDoubleClick="DiagnosisesDataGrid_MouseDoubleClick" 
                       ItemsSource="{Binding Diagnoses}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedDiagnosis}" IsReadOnly="True">
@@ -69,7 +69,7 @@
             </DataGrid>
 
             <TextBlock Text="Встречи" Margin="0 10 0 0"/>
-            <DataGrid x:Name="AppointmentsDataGrid" 
+            <DataGrid  ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="AppointmentsDataGrid" 
                       Margin="5 0"
                       MouseDoubleClick="AppointmentsDataGrid_MouseDoubleClick" ItemsSource="{Binding Appointments}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAppointment}" IsReadOnly="True">
                 <DataGrid.Columns>
@@ -81,7 +81,7 @@
 
         <StackPanel Grid.Column="2">
             <TextBlock Text="Ренгеновские снимки" Margin="0 10 0 0"/>
-            <DataGrid x:Name="XraysDataGrid" 
+            <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="XraysDataGrid" 
                       Margin="5 0"
                       MouseDoubleClick="XraysDataGrid_MouseDoubleClick" 
                       ItemsSource="{Binding Xrays}" AutoGenerateColumns="False" IsReadOnly="True">
@@ -93,7 +93,7 @@
             </DataGrid>
 
             <TextBlock Text="Процедуры" Margin="0 10 0 0"/>
-            <DataGrid x:Name="ProceduresDataGrid" 
+            <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="ProceduresDataGrid" 
                       Margin="5 0"
                       MouseDoubleClick="ProceduresDataGrid_MouseDoubleClick" 
                       ItemsSource="{Binding Procedures}" AutoGenerateColumns="False" IsReadOnly="True">
@@ -105,7 +105,7 @@
             </DataGrid>
 
             <TextBlock Text="Операции" Margin="0 10 0 0"/>
-            <DataGrid x:Name="OperationsDataGrid" MouseDoubleClick="OperationsDataGrid_MouseDoubleClick" 
+            <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="OperationsDataGrid" MouseDoubleClick="OperationsDataGrid_MouseDoubleClick" 
                       Margin="5 0"
                       ItemsSource="{Binding Operations}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
@@ -116,7 +116,7 @@
             </DataGrid>
 
             <TextBlock Text="Заметки" Margin="0 10 0 0"/>
-            <DataGrid x:Name="NotesDataGrid" MouseDoubleClick="NotesDataGrid_MouseDoubleClick" 
+            <DataGrid ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="NotesDataGrid" MouseDoubleClick="NotesDataGrid_MouseDoubleClick" 
                       Margin="5 0"
                       ItemsSource="{Binding Notes}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>

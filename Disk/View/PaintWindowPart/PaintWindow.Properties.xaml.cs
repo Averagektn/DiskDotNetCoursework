@@ -22,7 +22,7 @@ namespace Disk
         public List<Point2DF> PathInTargetCoords = [];
         public List<Point2DF> AllPath = [];
 
-        private readonly StaticticsRepository staticticsRepository = new();
+        private readonly StatisticsRepository staticticsRepository = new();
 
         public List<Point2DF> DbMapCenters = [];
         public string DbTargetFilePath = string.Empty;

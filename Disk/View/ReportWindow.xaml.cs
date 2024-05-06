@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Disk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +15,19 @@ using System.Windows.Shapes;
 
 namespace Disk.View
 {
-    /// <summary>
-    /// Interaction logic for ReportWindow.xaml
-    /// </summary>
     public partial class ReportWindow : Window
     {
+        private readonly ReportViewModel _viewModel = new();
+
         public ReportWindow()
         {
             InitializeComponent();
+            DataContext = _viewModel;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.OnSessionSelected();
         }
     }
 }

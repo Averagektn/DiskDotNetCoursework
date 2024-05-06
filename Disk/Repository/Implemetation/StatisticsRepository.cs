@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Disk.Repository.Implemetation
 {
-    public class StaticticsRepository : IStatisticsRepository
+    public class StatisticsRepository : IStatisticsRepository
     {
         private readonly DiskContext _context = new();
 
