@@ -8,10 +8,10 @@ namespace Disk.ViewModel
     public class AddContraindicationViewModel : PopupViewModel
     {
         private readonly PatientRepository _patientRepository = new();
-        public ICommand AddContraindicationCommand => new Command(AddRegion);
+        public ICommand AddContraindicationCommand => new Command(AddContraindication);
         public string ContraindicationName { get; set; } = string.Empty;
 
-        public async void AddRegion(object? parameter)
+        public async void AddContraindication(object? parameter)
         {
             ContraindicationName = ContraindicationName.Trim().ToLower();
             if (ContraindicationName.Length == 0)

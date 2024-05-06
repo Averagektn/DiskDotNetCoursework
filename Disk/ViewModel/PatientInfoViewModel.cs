@@ -119,24 +119,24 @@ namespace Disk.ViewModel
 
         public async void OnDiagnosisClick()
         {
-            if (SelectedDiagnosis.Diagnosis == default)
+            if (SelectedDiagnosis is null || SelectedDiagnosis.Diagnosis == default)
             {
-                return;
-            }
-
-            if (SelectedDiagnosis.DiagnosisFinish is null)
-            {
-                MessageBoxResult result = MessageBox.Show("Начать новый сеанс?", "Подтверждение",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-
-                }
+                new AddDiagnosisWindow().ShowDialog();
             }
             else
             {
-                SelectedDiagnosis.DiagnosisFinish = DateTime.Now.ToShortDateString();
-                await _patientRepository.CloseDiagnosisAsync(SelectedDiagnosis);
+                if (SelectedDiagnosis.DiagnosisFinish is null || SelectedDiagnosis.DiagnosisFinish.IsEmpty())
+                {
+                    SelectedDiagnosis.DiagnosisFinish = DateTime.Now.ToShortDateString();
+                    await _patientRepository.CloseDiagnosisAsync(SelectedDiagnosis);
+                }
+            }
+
+            Diagnoses.Clear();
+            var diagnoses = await _patientRepository.GetDiagnosesAsync(Card.Id);
+            foreach (var diagnosis in diagnoses)
+            {
+                Diagnoses.Add(diagnosis);
             }
         }
     }

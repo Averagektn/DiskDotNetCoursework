@@ -2,6 +2,7 @@
 using Disk.Entity;
 using Disk.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace Disk.Repository.Implemetation
 {
@@ -53,9 +54,21 @@ namespace Disk.Repository.Implemetation
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddDiagnosisAsync(Diagnosis diagnosis)
+        public async Task AddDiagnosisAsync(M2mCardDiagnosis diagnosis)
         {
-            throw new NotImplementedException();
+            var found = await _context.Diagnoses.Where(d => d.Name == diagnosis.DiagnosisNavigation.Name).FirstOrDefaultAsync();
+            if (found is null)
+            {
+                var dia = new Diagnosis() { Name = diagnosis.DiagnosisNavigation.Name };
+                await _context.Diagnoses.AddAsync(dia);
+                await _context.SaveChangesAsync();
+                await _context.M2mCardDiagnoses.AddAsync(new M2mCardDiagnosis() { Card = diagnosis.Card, Diagnosis = dia.Id, DiagnosisStart = diagnosis.DiagnosisStart });
+                await _context.SaveChangesAsync();
+                return;
+            }
+
+            await _context.M2mCardDiagnoses.AddAsync(new M2mCardDiagnosis() { Card = diagnosis.Card, Diagnosis = found.Id, DiagnosisStart = diagnosis.DiagnosisStart });
+            await _context.SaveChangesAsync();
         }
 
         public async Task CloseDiagnosisAsync(M2mCardDiagnosis diagnosis)
@@ -77,7 +90,7 @@ namespace Disk.Repository.Implemetation
 
         public async Task<List<M2mCardDiagnosis>> GetDiagnosesAsync(long cardId)
         {
-            return await _context.M2mCardDiagnoses.Where(m2m => m2m.Card == cardId).ToListAsync();
+            return await _context.M2mCardDiagnoses.Where(m2m => m2m.Card == cardId).Include(m => m.DiagnosisNavigation).ToListAsync();
         }
 
         public async Task<List<Appointment>> GetAppointmentsAsync(long patientId)

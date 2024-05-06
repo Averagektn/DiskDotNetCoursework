@@ -1,28 +1,27 @@
-﻿<Window x:Class="Disk.View.AddContraindicationWindow"
+﻿<Window x:Class="Disk.View.AddDiagnosisWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" 
-        d:DataContext="{d:DesignInstance Type=viewmodel:AddContraindicationViewModel}"
+        xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddDiagnosisViewModel}"
         mc:Ignorable="d"
-        Title="AddContraindicationWindow" Height="200" Width="300">
+        Title="AddDiagnosisWindow" Height="200" Width="300">
 
     <Window.Resources>
         <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
     </Window.Resources>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="Наименование противопоказания" 
+        <TextBlock Text="Наименование диагноза" 
                Margin="0,15"
                HorizontalAlignment="Left"/>
         <TextBox Padding="0,5"
               Width="255"
               BorderThickness="0,0,0,1"
               HorizontalAlignment="Left"
-              Text="{Binding ContraindicationName}"/>
+              Text="{Binding DiagnosisName}"/>
 
-        <Button Content="Добавить" Command="{Binding AddContraindicationCommand}"                    
+        <Button Content="Добавить" Command="{Binding AddDiagnosisCommand}"                    
                 Foreground="White"
                     Background="Black"
                     Margin="0,25"
