@@ -3,11 +3,11 @@
 namespace Disk
 {
     /// <summary>
-    ///     Interaction logic for UserDataForm.xaml
+    ///     Interaction logic for StartSessionWindow.xaml
     /// </summary>
-    public partial class UserDataForm : Window
+    public partial class StartSessionWindow : Window
     {
-        public UserDataForm()
+        public StartSessionWindow()
         {
             InitializeComponent();
         }

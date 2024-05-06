@@ -39,7 +39,7 @@ namespace Disk.ViewModel
         {
             if (Surname != string.Empty && UserName != string.Empty)
             {
-                Application.Current.Windows.OfType<UserDataForm>().First().Hide();
+                Application.Current.Windows.OfType<StartSessionWindow>().First().Hide();
                 new PaintWindow()
                 {
                     CurrPath =
@@ -49,7 +49,7 @@ namespace Disk.ViewModel
                     MapFilePath = MapText
                 }
                 .ShowDialog();
-                Application.Current.Windows.OfType<UserDataForm>().First().Close();
+                Application.Current.Windows.OfType<StartSessionWindow>().First().Close();
             }
             else
             {

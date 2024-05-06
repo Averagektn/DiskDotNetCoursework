@@ -9,9 +9,10 @@ namespace Disk.Repository.Implemetation
     {
         private readonly DiskContext _context = new();
 
-        public async Task<int> AssignAppointmentAsync(Appointment appointment)
+        public async Task AssignAppointmentAsync(Appointment appointment)
         {
-            throw new NotImplementedException();
+            await _context.Appointments.AddAsync(appointment);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AssignProcedureAsync(Procedure procedure)

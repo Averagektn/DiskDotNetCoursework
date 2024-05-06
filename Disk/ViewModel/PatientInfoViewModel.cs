@@ -12,11 +12,11 @@ namespace Disk.ViewModel
 {
     public class PatientInfoViewModel : PopupViewModel
     {
-        public ObservableCollection<Appointment> Appointments { get; set; } 
+        public ObservableCollection<Appointment> Appointments { get; set; }
         public ObservableCollection<Xray> Xrays { get; set; }
-        public ObservableCollection<Contraindication> Contraindications { get; set; } 
-        public ObservableCollection<M2mCardDiagnosis> Diagnoses { get; set; } 
-        public ObservableCollection<Operation> Operations { get; set; } 
+        public ObservableCollection<Contraindication> Contraindications { get; set; }
+        public ObservableCollection<M2mCardDiagnosis> Diagnoses { get; set; }
+        public ObservableCollection<Operation> Operations { get; set; }
         public ObservableCollection<Procedure> Procedures { get; set; }
         public ObservableCollection<Note> Notes { get; set; }
 
@@ -55,27 +55,28 @@ namespace Disk.ViewModel
             Notes = new(_doctorPatientRepository.GetNotesAsync(Patient.Id).Result);
         }
 
-        public void StartAppointment(object? parameter)
+        public async void StartAppointment(object? parameter)
         {
             MessageBoxResult result = MessageBox.Show("Начать новый сеанс?", "Подтверждение",
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
-
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                
+                await _doctorPatientRepository.AssignAppointmentAsync(new() { Doctor = CurrentSession.Doctor.Id, Patient = CurrentSession.Patient.Id, Time = DateTime.Now.ToShortDateString() });
+                Application.Current.Windows.OfType<PatientInfoWindow>().First().Close();
+                new StartSessionWindow().ShowDialog();
             }
         }
 
         public void OnAppointmentClick()
         {
-            if (SelectedAppointment.Id == default)
+            if (SelectedAppointment is null || SelectedAppointment.Id == default)
             {
                 return;
             }
+
+            CurrentSession.Appointment = SelectedAppointment;
+            new ReportWindow().ShowDialog();
         }
 
         public async void OnXrayClick()
