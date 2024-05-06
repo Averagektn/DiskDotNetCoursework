@@ -17,9 +17,12 @@ namespace Disk
 {
     public partial class PaintWindow : Window
     {
+        public List<Point2DF> DbMapCenters = [];
+        public string DbTargetFilePath = string.Empty;
+        public int DbMapIndex = 0;
+
         public const int TargetHP = 20;
 
-        public string MapFilePath = string.Empty;
         public string CurrPath = string.Empty;
 
         private static readonly object LockObject = new();
@@ -138,7 +141,7 @@ namespace Disk
             RbPath.Checked += RbPath_Checked;
             RbRose.Checked += RbRose_Checked;
 
-            User = new("/Properties/pngegg.png", new(SCREEN_INI_CENTER_X, SCREEN_INI_CENTER_Y), Settings.USER_INI_SPEED,
+            User = new(DbTargetFilePath, new(SCREEN_INI_CENTER_X, SCREEN_INI_CENTER_Y), Settings.USER_INI_SPEED,
                 new(50, 50), SCREEN_INI_SIZE);
             //User = new(new(SCREEN_INI_CENTER_X, SCREEN_INI_CENTER_Y), 5, 5, Brushes.Green, SCREEN_INI_SIZE);
         }

@@ -8,4 +8,5 @@ public static class CurrentSession
     public static Patient Patient { get; set; } = new();
     public static Card Card { get; set; } = new();
     public static Appointment Appointment { get; set; } = new();
+    public static Session Session { get; set; } = new();
 }

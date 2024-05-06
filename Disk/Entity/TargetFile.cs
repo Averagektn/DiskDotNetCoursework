@@ -9,4 +9,6 @@ public partial class TargetFile
     public long AddedBy { get; set; }
 
     public virtual Doctor AddedByNavigation { get; set; } = null!;
+
+    public override string ToString() => Filepath;
 }

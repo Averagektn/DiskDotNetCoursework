@@ -8,9 +8,10 @@ namespace Disk.Repository.Implemetation
     {
         private readonly DiskContext _context = new();
 
-        public async Task<int> StartSessionAsync(Session session)
+        public async Task StartSessionAsync(Session session)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(session);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddStatisticsAsync(int sessionId, SessionResult sessionResult, PathInTarget pathInTarget,

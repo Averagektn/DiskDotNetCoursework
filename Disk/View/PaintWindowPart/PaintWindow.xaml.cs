@@ -145,10 +145,9 @@ namespace Disk
                 Directory.CreateDirectory(CurrPath);
             }
 
-            if (MapFilePath != string.Empty)
+            if (DbMapCenters.Count > DbMapIndex)
             {
-                MapReader = FileReader<float>.Open(MapFilePath);
-                var center = MapReader.GetXY() ?? new(0.5f, 0.5f);
+                var center = DbMapCenters[DbMapIndex++];
                 Target = new(Converter.ToWnd_FromRelative(center),
                     Settings.TARGET_INI_RADIUS + 5, SCREEN_INI_SIZE, TargetHP);
                 TargetCenters.Add(center);

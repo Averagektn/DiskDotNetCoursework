@@ -27,4 +27,6 @@ public partial class Patient
     public virtual Address AddressNavigation { get; set; } = null!;
 
     public virtual ICollection<Procedure> Procedures { get; set; } = [];
+
+    public override string ToString() => $"Пациент {Surname} {Name} {Patronymic}";
 }

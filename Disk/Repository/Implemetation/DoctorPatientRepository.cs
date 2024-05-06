@@ -9,10 +9,11 @@ namespace Disk.Repository.Implemetation
     {
         private readonly DiskContext _context = new();
 
-        public async Task AssignAppointmentAsync(Appointment appointment)
+        public async Task<Appointment> AssignAppointmentAsync(Appointment appointment)
         {
-            await _context.Appointments.AddAsync(appointment);
+            var res = await _context.Appointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
+            return res.Entity;
         }
 
         public async Task AssignProcedureAsync(Procedure procedure)
@@ -49,6 +50,16 @@ namespace Disk.Repository.Implemetation
         public async Task<List<Note>> GetNotesAsync(long patientId)
         {
             return await _context.Notes.Where(n => n.Patient == patientId).Include(n => n.DoctorNavigation).ToListAsync();
+        }
+
+        public async Task<List<Map>> GetMapsAsync()
+        {
+            return await _context.Maps.ToListAsync();
+        }
+
+        public async Task<List<TargetFile>> GetTargetFilesAsync()
+        {
+            return await _context.TargetFiles.ToListAsync();
         }
     }
 }

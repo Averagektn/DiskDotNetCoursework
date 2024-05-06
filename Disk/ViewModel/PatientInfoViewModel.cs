@@ -62,7 +62,8 @@ namespace Disk.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
-                await _doctorPatientRepository.AssignAppointmentAsync(new() { Doctor = CurrentSession.Doctor.Id, Patient = CurrentSession.Patient.Id, Time = DateTime.Now.ToShortDateString() });
+                var app = await _doctorPatientRepository.AssignAppointmentAsync(new() { Doctor = CurrentSession.Doctor.Id, Patient = CurrentSession.Patient.Id, Time = DateTime.Now.ToShortDateString() });
+                CurrentSession.Appointment = app;
                 Application.Current.Windows.OfType<PatientInfoWindow>().First().Close();
                 new StartSessionWindow().ShowDialog();
             }

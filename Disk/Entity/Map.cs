@@ -1,4 +1,6 @@
-﻿namespace Disk.Entity;
+﻿using Disk.Extension;
+
+namespace Disk.Entity;
 
 public partial class Map
 {
@@ -15,4 +17,6 @@ public partial class Map
     public virtual Doctor CreatedByNavigation { get; set; } = null!;
 
     public virtual ICollection<Session> Sessions { get; set; } = [];
+
+    public override string ToString() => Name.ToUpperFirstLetter();
 }
