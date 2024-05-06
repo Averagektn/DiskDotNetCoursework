@@ -19,6 +19,12 @@ namespace Disk.Repository.Implemetation
             throw new NotImplementedException();
         }
 
+        public async Task AssignOperationAsync(Operation operation)
+        {
+            await _context.Operations.AddAsync(operation);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task AddNoteAsync(Note note)
         {
             throw new NotImplementedException();

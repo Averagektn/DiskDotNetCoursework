@@ -102,9 +102,16 @@ namespace Disk.ViewModel
             }
         }
 
-        public void OnOperationClick()
+        public async void OnOperationClick()
         {
+            new AddOperaionWindow().ShowDialog();
 
+            Operations.Clear();
+            var operations = await _doctorPatientRepository.GetOperationsAsync(Card.Id);
+            foreach (var operation in operations)
+            {
+                Operations.Add(operation);
+            }
         }
 
         public void OnProcedureClick()
