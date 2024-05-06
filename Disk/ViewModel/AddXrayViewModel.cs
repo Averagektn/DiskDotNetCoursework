@@ -2,53 +2,49 @@
 using Disk.Repository.Implemetation;
 using Disk.ViewModel.Common;
 using Microsoft.Win32;
-using System.IO;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
 {
-    public class AddTargetViewModel : PopupViewModel
+    public class AddXrayViewModel : PopupViewModel
     {
-        private readonly DoctorRepository _doctorRepository = new();
-        public ICommand AddTargetCommand => new Command(AddTarget);
+        private readonly PatientRepository _patientRepository = new();
+        public ICommand AddXrayCommand => new Command(AddXray);
         public ICommand OpenFileManagerCommand => new Command(OpenFileManager);
         private string _filePath = string.Empty;
         public string FilePath { get => _filePath; set => SetProperty(ref _filePath, value); }
-        private string _fileName = string.Empty;
-        public string FileName { get => _fileName; set => SetProperty(ref _fileName, value); }
 
         public void OpenFileManager(object? parameter)
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "Картинки (*.png)|*.png"
+                Filter = "Рентген (*)|*"
             };
             var result = openFileDialog.ShowDialog();
 
             if (result == true)
             {
                 FilePath = openFileDialog.FileName;
-                FileName = Path.GetFileName(openFileDialog.FileName);
             }
         }
 
-        public async void AddTarget(object? parameter)
+        public async void AddXray(object? parameter)
         {
             FilePath = FilePath.Trim();
             if (FilePath.Length == 0)
             {
-                await ShowPopup("Картинка не задана");
+                await ShowPopup("Рентген не задан");
                 return;
             }
 
             try
             {
-                await _doctorRepository.AddTargetFileAsync(new() { Filepath = FilePath, AddedBy = CurrentSession.Doctor.Id });
-                await ShowPopup("Картинка успешно добавлена");
+                await _patientRepository.AddXrayAsync(new() { FilePath = FilePath, Date = DateTime.Now.ToShortDateString(), Description = "Рентген", Card = CurrentSession.Card.Id });
+                await ShowPopup("Рентген успешно добавлен");
             }
             catch (Exception)
             {
-                await ShowPopup("Такая картинка уже существует");
+                await ShowPopup("Такой рентген уже существует");
             }
         }
     }

@@ -2,6 +2,7 @@
 using Disk.Entity;
 using Disk.Extension;
 using Disk.Repository.Implemetation;
+using Disk.View;
 using Disk.ViewModel.Common;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -43,6 +44,7 @@ namespace Disk.ViewModel
             _addressInRegion = $"{address.Street.ToUpperFirstLetter()}, {address.House}-{address.Apartment}({address.Corpus})";
 
             Card = _patientRepository.GetCardByPatientIdAsync(CurrentSession.Patient.Id).Result;
+            CurrentSession.Card = Card;
 
             Appointments = new(_patientRepository.GetAppointmentsAsync(Patient.Id).Result);
             Xrays = new(_patientRepository.GetXraysAsync(Card.Id).Result);
@@ -76,9 +78,16 @@ namespace Disk.ViewModel
             }
         }
 
-        public void OnXrayClick()
+        public async void OnXrayClick()
         {
+            new AddXrayWindow().ShowDialog();
 
+            Xrays.Clear();
+            var xrays = await _patientRepository.GetXraysAsync(Card.Id);
+            foreach (var xray in xrays)
+            {
+                Xrays.Add(xray);
+            }
         }
 
         public void OnContraidicationClick()

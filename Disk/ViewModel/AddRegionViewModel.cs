@@ -1,7 +1,5 @@
 ﻿using Disk.Repository.Implemetation;
-using Disk.View;
 using Disk.ViewModel.Common;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
@@ -30,8 +28,6 @@ namespace Disk.ViewModel
             {
                 await ShowPopup("Такой регион уже существует");
             }
-
-            Application.Current.Windows.OfType<AddRegionWindow>().First().Close();
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using Disk.Entity;
 using Disk.Repository.Implemetation;
-using Disk.View;
 using Disk.ViewModel.Common;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
@@ -45,8 +43,6 @@ namespace Disk.ViewModel
             {
                 await ShowPopup("Такой район уже существует");
             }
-
-            Application.Current.Windows.OfType<AddDistrictWindow>().First().Close();
         }
     }
 }

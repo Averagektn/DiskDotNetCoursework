@@ -48,7 +48,8 @@ namespace Disk.Repository.Implemetation
 
         public async Task AddXrayAsync(Xray xray)
         {
-            throw new NotImplementedException();
+            await _context.Xrays.AddAsync(xray);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddDiagnosisAsync(Diagnosis diagnosis)

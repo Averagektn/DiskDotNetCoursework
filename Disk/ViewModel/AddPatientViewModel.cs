@@ -4,7 +4,6 @@ using Disk.Repository.Implemetation;
 using Disk.View;
 using Disk.ViewModel.Common;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Disk.ViewModel
@@ -17,10 +16,10 @@ namespace Disk.ViewModel
 
         public District SelectedDistrict { get; set; } = new();
         public Region SelectedRegion { get; set; } = new();
-        
+
         public ObservableCollection<Region> Regions { get; set; }
         public ObservableCollection<District> Districts { get; set; }
-        
+
         private readonly AddressRepository _addressRepository = new();
         private readonly PatientRepository _patientRepository = new();
         private List<District> _districts;
@@ -48,7 +47,7 @@ namespace Disk.ViewModel
         private string _apartment = string.Empty;
         private string _corpus = string.Empty;
         private string _street = string.Empty;
-        public string House { get => _house.Trim().ToLower(); set => SetProperty(ref _house, value); } 
+        public string House { get => _house.Trim().ToLower(); set => SetProperty(ref _house, value); }
         public string Apartment { get => _apartment.Trim().ToLower(); set => SetProperty(ref _apartment, value); }
         public string Corpus { get => _corpus.Trim().ToLower(); set => SetProperty(ref _corpus, value); }
         public string Street { get => _street.Trim().ToLower(); set => SetProperty(ref _street, value); }
@@ -119,8 +118,6 @@ namespace Disk.ViewModel
             {
                 await ShowPopup("Ошибка добавления пациента");
             }
-
-            Application.Current.Windows.OfType<AddPatientWindow>().First().Close();
         }
 
         private async Task<Address?> AddAddressAsync()
