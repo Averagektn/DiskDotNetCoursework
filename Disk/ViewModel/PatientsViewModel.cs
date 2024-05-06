@@ -13,7 +13,8 @@ namespace Disk.ViewModel
     {
         public Patient SelectedPatient { get; set; } = new();
 
-        public ICommand PatientClickCommand => new Command(ToAddPatient);
+        public ICommand PatientClickCommand => new Command(ToPatientInfo);
+        public ICommand AddPatientCommand => new Command(ToAddPatient);
         public string SearchText { get; set; } = string.Empty;
         public ObservableCollection<Patient> Patients { get; set; }
 
@@ -38,11 +39,11 @@ namespace Disk.ViewModel
             }
         }
 
-        public void ToPatientInfo()
+        public void ToPatientInfo(object? parameter)
         {
             CurrentSession.Patient = SelectedPatient;
             Application.Current.Windows.OfType<PatientsWindow>().First().Close();
-            new PatientInfoWindow().Show();
+            new PatientInfoWindow().ShowDialog();
         }
 
         public void Find()

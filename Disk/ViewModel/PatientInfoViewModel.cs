@@ -1,25 +1,29 @@
 ﻿using Disk.AppSession;
 using Disk.Entity;
+using Disk.Extension;
 using Disk.Repository.Implemetation;
 using Disk.ViewModel.Common;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Disk.ViewModel
 {
     public class PatientInfoViewModel : PopupViewModel
     {
-        public ObservableCollection<(Appointment Appointment, string Date)> AppointmentsWithDate { get; set; } 
         public ObservableCollection<Appointment> Appointments { get; set; } 
         public ObservableCollection<Xray> Xrays { get; set; }
         public ObservableCollection<Contraindication> Contraindications { get; set; } 
-        public ObservableCollection<Diagnosis> Diagnoses { get; set; } 
+        public ObservableCollection<M2mCardDiagnosis> Diagnoses { get; set; } 
         public ObservableCollection<Operation> Operations { get; set; } 
         public ObservableCollection<Procedure> Procedures { get; set; }
         public ObservableCollection<Note> Notes { get; set; }
+        public ICommand StartAppointmentCommand => new Command(StartAppointment);
 
         public Appointment SelectedAppointment { get; set; } = new();
+        public M2mCardDiagnosis SelectedDiagnosis { get; set; } = new();
         public Card Card { get; set; }
-        public Patient Patient = CurrentSession.Patient;
+        public Patient Patient { get; set; } = CurrentSession.Patient;
 
         public string AddressInCountry { get => _addressInCountry; set => SetProperty(ref _addressInCountry, value); }
         public string AddressInRegion { get => _addressInRegion; set => SetProperty(ref _addressInRegion, value); }
@@ -29,14 +33,38 @@ namespace Disk.ViewModel
 
         private readonly PatientRepository _patientRepository = new();
         private readonly AddressRepository _addressRepository = new();
+        private readonly DoctorPatientRepository _doctorPatientRepository = new();
 
         public PatientInfoViewModel()
         {
             var address = _addressRepository.GetAddressByPatientIdAsync(Patient.Id).Result;
-            _addressInCountry = $"{address.DistrictNavigation.Name}, {address.DistrictNavigation.RegionNavigation.Name}";
-            _addressInRegion = $"{address.Street}, {address.House}-{address.Apartment}({address.Corpus})";
+            _addressInCountry = $"{address.DistrictNavigation.Name.ToUpperFirstLetter()}, {address.DistrictNavigation.RegionNavigation.Name.ToUpperFirstLetter()}";
+            _addressInRegion = $"{address.Street.ToUpperFirstLetter()}, {address.House}-{address.Apartment}({address.Corpus})";
 
             Card = _patientRepository.GetCardByPatientIdAsync(CurrentSession.Patient.Id).Result;
+
+            Appointments = new(_patientRepository.GetAppointmentsAsync(Patient.Id).Result);
+            Xrays = new(_patientRepository.GetXraysAsync(Card.Id).Result);
+            Contraindications = new(_patientRepository.GetContraindicationsAsync(Card.Id).Result);
+            Diagnoses = new(_patientRepository.GetDiagnosesAsync(Card.Id).Result);
+            Operations = new(_doctorPatientRepository.GetOperationsAsync(Card.Id).Result);
+            Procedures = new(_doctorPatientRepository.GetProceduresAsync(Patient.Id).Result);
+            Notes = new(_doctorPatientRepository.GetNotesAsync(Patient.Id).Result);
+        }
+
+        public void StartAppointment(object? parameter)
+        {
+            MessageBoxResult result = MessageBox.Show("Начать новый сеанс?", "Подтверждение",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                
+            }
         }
     }
 }

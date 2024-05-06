@@ -23,7 +23,7 @@ namespace Disk.View
 
         private void PatientsDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            _viewModel.ToPatientInfo();
+            _viewModel.ToPatientInfo(null);
         }
     }
 }

@@ -10,7 +10,7 @@
     <StackPanel>
         <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="Пациенты">
-                <MenuItem Header="Добавить..." Command="{Binding AddPatient}"/>
+                <MenuItem Header="Добавить..." Command="{Binding AddPatientCommand}"/>
             </MenuItem>
         </Menu>
         <TextBlock Text="Поиск (ФИО):" 

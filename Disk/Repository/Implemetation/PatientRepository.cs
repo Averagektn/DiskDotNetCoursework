@@ -61,19 +61,28 @@ namespace Disk.Repository.Implemetation
 
         }
 
-        public async Task<List<Contraindication>> GetContraindicationsAsync()
+        public async Task<List<Contraindication>> GetContraindicationsAsync(long cardId)
         {
-            throw new NotImplementedException();
+            return await _context.Contraindications.Where(c => c.Card == cardId).ToListAsync();
         }
 
-        public async Task GetXraysAsync()
+        public async Task<List<Xray>> GetXraysAsync(long cardId)
         {
-            throw new NotImplementedException();
+            return await _context.Xrays.Where(x => x.Card == cardId).ToListAsync();
         }
 
-        public async Task GetDiagnosesAsync()
+        public async Task<List<M2mCardDiagnosis>> GetDiagnosesAsync(long cardId)
         {
-            throw new NotImplementedException();
+            return await _context.M2mCardDiagnoses.Where(m2m => m2m.Card == cardId).ToListAsync();
+        }
+
+        public async Task<List<Appointment>> GetAppointmentsAsync(long patientId)
+        {
+            return await _context.Appointments
+                .Where(a => a.Patient == patientId)
+                .Include(a => a.DoctorNavigation)
+                .Include(a => a.Sessions)
+                .ToListAsync();
         }
     }
 }

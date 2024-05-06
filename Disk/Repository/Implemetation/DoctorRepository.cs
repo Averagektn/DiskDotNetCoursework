@@ -50,10 +50,5 @@ namespace Disk.Repository.Implemetation
             await _context.AddAsync(targetFile);
             await _context.SaveChangesAsync();
         }
-
-        public async Task<List<Appointment>> GetAppointmentsAsync()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

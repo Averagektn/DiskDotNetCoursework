@@ -1,6 +1,7 @@
 ﻿using Disk.Db.Context;
 using Disk.Entity;
 using Disk.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Disk.Repository.Implemetation
 {
@@ -23,19 +24,22 @@ namespace Disk.Repository.Implemetation
             throw new NotImplementedException();
         }
 
-        public async Task<List<Procedure>> GetProceduresAsync()
+        public async Task<List<Procedure>> GetProceduresAsync(long patientId)
         {
-            throw new NotImplementedException();
+            return await _context.Procedures
+                .Where(p => p.AssignedTo == patientId)
+                .Include(p => p.AssignedByNavigation)
+                .ToListAsync();
         }
 
-        public async Task<List<Operation>> GetOperationsAsync()
+        public async Task<List<Operation>> GetOperationsAsync(long cardId)
         {
-            throw new NotImplementedException();
+            return await _context.Operations.Where(o => o.Card == cardId).Include(o => o.AsingnedByNavigation).ToListAsync();
         }
 
-        public async Task<List<Note>> GetNotesAsync()
+        public async Task<List<Note>> GetNotesAsync(long patientId)
         {
-            throw new NotImplementedException();
+            return await _context.Notes.Where(n => n.Patient == patientId).Include(n => n.DoctorNavigation).ToListAsync();
         }
     }
 }
