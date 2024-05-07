@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Disk.View" xmlns:viewmodel="clr-namespace:Disk.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:PatientInfoViewModel}"
         mc:Ignorable="d"
-        Title="PatientInfoWindow" Height="450" Width="1200">
+        Title="PatientInfoWindow" Height="1200" Width="1200">
 
     <Window.Resources>
         <ResourceDictionary Source="/Style/BtnStyles.xaml"/>
