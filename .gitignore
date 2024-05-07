@@ -408,3 +408,6 @@ FodyWeavers.xsd
 /Disk/Db/disk.db-shm
 /Disk/Db/disk.db-wal
 *.jpg
+*.drawio
+*.bkp
+*.dtmp
